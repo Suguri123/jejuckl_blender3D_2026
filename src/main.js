@@ -46,7 +46,7 @@ function renderSidebarCourses() {
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
           const cleanTitle = lesson.title.replace(/^[0-9]+차시:\s*/, '');
-          const isUnderConstruction = lesson.id === 3 || lesson.id === 4;
+          const isUnderConstruction = lesson.id === 4;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="nav-item ${isUnderConstruction ? 'disabled' : ''}" 
@@ -94,7 +94,7 @@ function renderOverviewCards() {
       </div>
       <div class="lessons-grid">
         ${course.lessons.map(lesson => {
-          const isUnderConstruction = lesson.id === 3 || lesson.id === 4;
+          const isUnderConstruction = lesson.id === 4;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
@@ -137,7 +137,7 @@ function handleHashChange() {
     currentCourseId = courseId;
     currentLessonId = lessonId || 1;
 
-    if (currentLessonId === 3 || currentLessonId === 4) {
+    if (currentLessonId === 4) {
       alert("준비 중인 차시입니다.");
       window.location.hash = 'overview';
       return;
@@ -253,6 +253,11 @@ function updateLessonContent(courseId, lessonId) {
         <div class="step-sub-items-box" style="margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.8rem;">
           ${s.subItems.map(sub => `
             <div class="sub-item-card" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.8rem 1rem;">
+              ${sub.img && sub.imgPos === 'before-title' ? `
+                <div class="sub-item-img-box" style="border-radius: 6px; overflow: hidden; border: 1px solid #e2e8f0; padding: 0.3rem; background: #fafafa; margin-bottom: 0.6rem; display: inline-block;">
+                  <img src="${sub.img}" alt="${sub.subTitle}" style="max-width: ${sub.imgWidth || '100%'}; width: 100%; display: block; height: auto; object-fit: contain;" />
+                </div>
+              ` : ''}
               <h5 style="font-size: 0.9rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.3rem;">${sub.subTitle}</h5>
               <p style="font-size: 0.83rem; color: #475569; margin-bottom: 0.5rem;">${sub.subDesc}</p>
               ${sub.img && sub.imgPos === 'top' ? `
@@ -285,7 +290,7 @@ function updateLessonContent(courseId, lessonId) {
                   </table>
                 </div>
               ` : ''}
-              ${sub.img && sub.imgPos !== 'top' ? `
+              ${sub.img && sub.imgPos !== 'top' && sub.imgPos !== 'before-title' ? `
                 <div class="sub-item-img-box" style="border-radius: 6px; overflow: hidden; border: 1px solid #e2e8f0; padding: 0.3rem; background: #fafafa; margin-bottom: ${sub.img2 ? '0.6rem' : '0'};">
                   <img src="${sub.img}" alt="${sub.subTitle}" style="max-width: ${sub.imgWidth || '100%'}; width: 100%; display: block; height: auto; object-fit: contain;" />
                 </div>

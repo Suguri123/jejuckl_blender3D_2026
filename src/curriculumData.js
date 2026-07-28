@@ -496,31 +496,187 @@ export const coursesData = [
         badge: "응용 / 미러 & 스컬프팅",
         objectType: "mini_character",
         outcomes: [
-          "Mirror Modifier(미러 모디파이어)를 활용한 대칭 오브젝트 실시간 조형",
-          "Subdivision Surface(세분화 모디파이어)로 매끄러운 캐릭터 바디 형성",
-          "Sculpt Mode(스컬프트 모드) 전환 및 Clay, Grab, Smooth 브러시 작동 원리 체득",
-          "3D 피규어 출력을 위한 독립된 파트 통합 및 Solidify 체크"
+          "Mirror Modifier(미러 모디파이어)를 활용한 대칭 오브젝트 조형",
+          "Sculpt Mode(스컬프트 모드) 전환 및 Clay, Grab, Smooth 브러시 작동 원리 체득"
         ],
         steps: [
           {
             step: 1,
-            title: "구(UV Sphere) 기반 미니 캐릭터 머리/몸통 가이드",
-            desc: "UV Sphere 추가 후 Mirror Modifier를 켜서 좌우 대칭 기준점(X축) 설정"
+            title: "기본 메쉬 배치 및 Bool Tool 병합 (기본 체형)",
+            desc: "기본 도형(Sphere, Cylinder)을 배치하고 미러 모디파이어와 Bool Tool 애드온을 활용해 캐릭터의 기본 체형 메쉬를 만듭니다.",
+            subItems: [
+              {
+                subTitle: "① Bool Tool 애드온 활성화하기",
+                subDesc: "블렌더에서 제공하는 기본 애드온을 활성화하여 결합 작업을 손쉽게 준비합니다.",
+                details: [
+                  "<b>방법</b>: 상단 메뉴 Edit ➔ Preferences ➔ Add-ons 탭으로 이동합니다.",
+                  "<b>설정</b>: 검색창에 Bool Tool을 입력한 뒤, Object: Bool Tool 항목의 체크박스를 활성화합니다.",
+                  "<img src=\"./images/bool_tool_setting.png\" alt=\"Bool Tool 설정\" style=\"max-width: 462px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<b>메뉴 실행</b>: 3D 뷰포트에서 단축키 <b>N</b> 키를 누른 후, 우측 사이드바의 <b>Edit</b> 탭 ➔ <b>Bool Tool</b> 항목에서 연산을 선택합니다.",
+                  "<img src=\"./images/bool_tool_menu.png\" alt=\"Bool Tool 메뉴\" style=\"max-width: 462px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<div style=\"background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 1rem; margin: 0.8rem 0; font-family: inherit;\"><h6 style=\"margin: 0 0 0.6rem 0; font-size: 0.88rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 0.4rem;\"><span style=\"background: #3b82f6; width: 6px; height: 14px; display: inline-block; border-radius: 2px;\"></span>Boolean(불리언) 주요 4가지 연산 기능</h6><ul style=\"list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8rem; color: #334155;\"><li><strong style=\"color: #2563eb;\">• Union (합집합 - 결합):</strong> 선택한 오브젝트들을 하나로 합칩니다. (이번 캐릭터 체형 제작에 사용한 기능)</li><li><strong style=\"color: #2563eb;\">• Difference (차집합 - 빼기):</strong> 기준 오브젝트에서 다른 오브젝트의 모양만큼 싹 깎아냅니다. (예: 눈 구멍을 뚫거나 옷의 패인 홈을 만들 때)</li><li><strong style=\"color: #2563eb;\">• Intersect (교집합 - 겹침):</strong> 두 오브젝트가 서로 겹치는 부분만 남기고 나머지는 삭제합니다.</li><li><strong style=\"color: #2563eb;\">• Slice (조각내기):</strong> 겹치는 부분을 칼로 자르듯 분리해 내어 독립된 메쉬로 나눠줍니다.</li></ul><h6 style=\"margin: 0.8rem 0 0.6rem 0; font-size: 0.88rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 0.4rem;\"><span style=\"background: #10b981; width: 6px; height: 14px; display: inline-block; border-radius: 2px;\"></span>Bool Tool의 2가지 작동 방식</h6><p style=\"font-size: 0.78rem; color: #64748b; margin: 0 0 0.6rem 0; line-height: 1.4;\">Bool Tool 메뉴나 단축키를 보시면 Auto Boolean과 Brush Boolean으로 나뉘어 있습니다.</p><div style=\"overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 6px;\"><table style=\"width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; background: #ffffff;\"><thead><tr style=\"background: #f1f5f9; color: #1e293b; font-weight: 600; border-bottom: 1px solid #cbd5e1;\"><th style=\"padding: 6px 8px;\">방식</th><th style=\"padding: 6px 8px;\">설명</th><th style=\"padding: 6px 8px; white-space: nowrap;\">주요 단축키</th><th style=\"padding: 6px 8px;\">활용 상황</th></tr></thead><tbody><tr style=\"border-bottom: 1px solid #f1f5f9;\"><td style=\"padding: 6px 8px; font-weight: 600; color: #2563eb; white-space: nowrap;\">Auto Boolean</td><td style=\"padding: 6px 8px; line-height: 1.3;\">즉시 면을 계산하여 하나로 합치거나 깎아내고 <strong>원본을 파괴(Apply)</strong>합니다.</td><td style=\"padding: 6px 8px; font-family: monospace; font-size: 0.72rem; color: #dc2626; white-space: nowrap;\">Ctrl + Shift + Numpad (+ / -)</td><td style=\"padding: 6px 8px; line-height: 1.3;\">완벽히 위치가 확정된 후 빠른 병합이 필요할 때</td></tr><tr><td style=\"padding: 6px 8px; font-weight: 600; color: #10b981; white-space: nowrap;\">Brush Boolean</td><td style=\"padding: 6px 8px; line-height: 1.3;\">모디파이어 형태로 적용되어, 깎아내는 위치를 나중에도 자유롭게 이동/수정할 수 있습니다.</td><td style=\"padding: 6px 8px; font-family: monospace; font-size: 0.72rem; color: #dc2626; white-space: nowrap;\">Ctrl + Numpad (+ / -)</td><td style=\"padding: 6px 8px; line-height: 1.3;\">형태 조율 중이거나 나중에 형태 수정을 고려해야 할 때</td></tr></tbody></table></div></div>"
+                ]
+              },
+              {
+                subTitle: "② 기본 메쉬 배치 및 비율잡기",
+                subDesc: "3D 뷰포트에 기본 도형들을 추가하고 이동/스케일 조절을 통해 캐릭터 비율을 만듭니다.",
+                details: [
+                  "<b>참조 이미지 불러오기 (Reference)</b>: 모델링의 가이드라인이 될 참조 이미지를 불러옵니다. <br>방법: <b>Shift + A</b> ➔ <b>Image</b> ➔ <b>Reference</b> 메뉴로 이동하여 원하는 PNG 이미지 파일을 불러옵니다.",
+                  "<img src=\"./images/reference_image_setting.png\" alt=\"참조 이미지 불러오기\" style=\"max-width: 462px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<b>참조 이미지 불투명도(Opacity) 조절하기</b>: 이미지가 3D 오브젝트를 가리지 않도록 투명하게 설정하면 모델링 작업이 훨씬 수월해집니다. <br>방법: 불러온 참조 이미지(Empty) 선택 ➔ 우측 Object Data Properties (빨간색 빈 축 아이콘) ➔ <b>Opacity</b> 항목을 체크한 뒤 값을 0.2 ~ 0.4 정도로 낮춰줍니다.",
+                  "<img src=\"./images/reference_image_opacity.png\" alt=\"불투명도 조절\" style=\"max-width: 370px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<b>머리 (Head)</b>: Shift + A ➔ Mesh ➔ UV Sphere 생성 후 G ➔ Z 키로 위쪽 이동, 그리고 S키로 크기 조절",
+                  "<b>몸통 (Torso)</b>: Shift + A ➔ Mesh ➔ UV Sphere 생성 후 머리 아래 배치, S ➔ Z 키로 형태 조절",
+                  "<b>다리 (Legs)</b>: Shift + A ➔ Mesh ➔ Cylinder 생성 후 오른쪽 다리 위치로 이동 및 크기 조절",
+                  "<div style=\"display: flex; gap: 0.8rem; align-items: center; margin: 0.4rem 0 0.8rem 0; flex-wrap: wrap;\"><img src=\"./images/leg_placement_1.png\" alt=\"다리 배치 1\" style=\"max-width: 226px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; display: block;\" /><img src=\"./images/leg_placement_2.png\" alt=\"다리 배치 2\" style=\"max-width: 226px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; display: block;\" /></div>"
+                ]
+              },
+              {
+                subTitle: "③ 다리 미러 모디파이어(Mirror Modifier) 적용하기",
+                subDesc: "한쪽 다리만 만들어도 반대쪽 다리가 자동으로 대칭 생성되도록 설정합니다.",
+                details: [
+                  "<b>방법</b>: 다리(Cylinder) 선택 후 우측 Modifier Properties (렌치 아이콘) ➔ Add Modifier ➔ Mirror 클릭",
+                  "<b>기준점 설정</b>: Mirror Object 스포이드 아이콘을 클릭하고 머리 또는 몸통 스피어를 선택하여 중심축(X=0)을 잡아줍니다.",
+                  "<div style=\"display: flex; gap: 0.8rem; align-items: center; margin: 0.4rem 0 0.8rem 0; flex-wrap: wrap;\"><img src=\"./images/mirror_origin_1_final.png\" alt=\"기준점 설정 1\" style=\"max-width: 226px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; display: block;\" /><img src=\"./images/mirror_origin_2.png\" alt=\"기준점 설정 2\" style=\"max-width: 226px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; display: block;\" /></div>"
+                ]
+              },
+              {
+                subTitle: "④ Bool Tool로 하나로 병합하기 (Auto Boolean)",
+                subDesc: "배치된 메쉬들을 매끄럽게 하나의 단일 메쉬로 자동 합성합니다.",
+                details: [
+                  "<b>선택 순서</b>: Shift 키를 누른 채 다리 ➔ 몸통 ➔ 머리 순으로 선택합니다. (전체 선택)",
+                  "<b>실행</b>: 단축키 <b>N</b> 키를 눌러 우측 사이드바(N-Panel) ➔ <b>Edit</b> ➔ <b>Bool Tool</b> ➔ <b>Auto Boolean</b> ➔ <b>Union</b>을 실행합니다."
+                ]
+              }
+            ]
           },
           {
             step: 2,
-            title: "팔, 다리, 귀 부속품 대칭 모델링",
-            desc: "Extrude와 Scale을 조절하여 귀여운 미니 피규어 비율(2등신 캐릭터)의 팔다리와 귀 구성"
+            title: "팔, 귀 부속품 대칭 모델링 (Symmetry)",
+            desc: "스컬프트 모드의 대칭 기능과 미러 모디파이어를 활용해 팔과 귀 등 좌우 대칭 부속품을 제작합니다.",
+            subItems: [
+              {
+                subTitle: "① 스컬프트 모드 대칭(Symmetry) 설정하기",
+                subDesc: "좌우 대칭 축을 켜서 한쪽 작업 시 반대쪽도 동일하게 반영되도록 설정합니다.",
+                img: "./images/sculpt_mode_enter.png",
+                imgPos: "before-title",
+                imgWidth: "415px",
+                details: [
+                  "<b>설정</b>: 3D 뷰포트 우상단 Symmetry 옵션에서 X 축 버튼이 활성화되어 있는지 확인합니다."
+                ]
+              },
+              {
+                subTitle: "② 마스크(Mask) 영역 지정 및 반전하기",
+                subDesc: "팔과 귀가 뽑아져 나올 위치를 칠한 뒤 영역을 반전하여 추출 준비를 합니다.",
+                details: [
+                  "<b>마스크 칠하기 (단축키: M)</b>: Mask 브러시를 선택하고, 캐릭터의 어깨(팔 위치) 및 머리 측면(귀 위치) 영역을 칠합니다. (대칭 기능으로 반대쪽도 자동 지정됩니다.)",
+                  "<b>마스크 반전 (단축키: Ctrl + I)</b>: Ctrl + I를 눌러 칠한 부위를 제외한 나머지 전체 영역을 마스크 처리합니다. (이제 마스크가 안 칠해진 팔/귀 영역만 자유롭게 변형할 수 있게 됩니다.)"
+                ]
+              },
+              {
+                subTitle: "③ 브러시로 부속품 돌출시키기 (Elastic Grab / Snake Hook)",
+                subDesc: "선택된 영역의 메쉬를 뽑아내어 형태를 만들어 줍니다.",
+                details: [
+                  "<b>형태 뽑아내기</b>: Elastic Grab 브러시(또는 Snake Hook 브러시)를 선택하고 마우스 드래그로 팔과 귀의 형태를 바깥쪽으로 길게 당겨서 뽑아냅니다.",
+                  "<b>마스크 해제 (단축키: Alt + M)</b>: 돌출 작업이 완료되면 Alt + M을 눌러 전체 마스크를 해제합니다.",
+                  "<div style=\"background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 0.6rem 0.9rem; margin-top: 0.5rem; font-size: 0.82rem; color: #1e3a8a;\"><p style=\"margin-bottom: 0.3rem;\">💡 <b>꿀팁! 메쉬 깨짐 대처법</b></p><p style=\"margin-bottom: 0;\">메쉬를 많이 늘리다 보면 해당 부분의 면이 얇아지거나 깨질 수 있습니다. 팔/귀를 뽑아낸 후 <b>3단계의 Voxel Remesh (Ctrl + R)</b>를 실행하면 줄어든 면이 고르게 재정렬되므로 걱정하지 않고 자유롭게 형태를 잡아도 됩니다!</p><div style=\"display: flex; gap: 0.5rem; align-items: center; margin-top: 0.6rem; flex-wrap: nowrap;\"><img src=\"./images/voxel_remesh_1.png\" alt=\"리메쉬 1\" style=\"max-width: 100px; width: 100%; border-radius: 4px; border: 1px solid #bfdbfe; display: block;\" /><img src=\"./images/voxel_remesh_2.png\" alt=\"리메쉬 2\" style=\"max-width: 100px; width: 100%; border-radius: 4px; border: 1px solid #bfdbfe; display: block;\" /><img src=\"./images/voxel_remesh_3.png\" alt=\"리메쉬 3\" style=\"max-width: 220px; width: 100%; border-radius: 4px; border: 1px solid #bfdbfe; display: block;\" /></div></div>"
+                ]
+              }
+            ]
           },
           {
             step: 3,
-            title: "Sculpt Mode 브러시 조형",
-            desc: "Grab 브러시(G)로 유기적인 곡선 표면 변형, Smooth 브러시(Shift)로 표면 다듬기"
+            title: "Sculpt Mode 브러시 조형 및 표면 정돈",
+            desc: "기본 형상이 완성된 캐릭터를 스컬프트 모드 브러시를 사용해 유기적이고 부드러운 형태로 다듬습니다.",
+            subItems: [
+              {
+                subTitle: "① 보셀 리메쉬(Voxel Remesh)로 면 구조 재정렬하기",
+                subDesc: "Bool Tool 결합 과정에서 얽힌 면(Topology)을 균일한 격자 구조로 재구성합니다.",
+                details: [
+                  "<b>방법</b>: Sculpt Mode 상단 Remesh 메뉴 클릭 ➔ Voxel Size를 0.01 ~ 0.02로 설정",
+                  "<b>실행</b>: 단축키 Ctrl + R을 누르면 전체 면이 고르고 균일하게 재구성됩니다."
+                ]
+              },
+              {
+                subTitle: "② Grab 브러시 (단축키: G) 활용하기",
+                subDesc: "캐릭터의 전체적인 윤곽 and 곡선 표면을 당기거나 밀어서 유기적으로 변형합니다.",
+                details: [
+                  "<b>활용</b>: 볼의 볼륨감, 턱선, 귀의 곡선, 팔다리의 매끄러운 연결부 등을 자연스럽게 잡아줍니다."
+                ]
+              },
+              {
+                subTitle: "③ Smooth 브러시 (단축키: Shift 누른 채 드래그) 활용하기",
+                subDesc: "울퉁불퉁하거나 리메쉬로 인해 거칠어진 표면을 부드럽게 매만집니다.",
+                details: [
+                  "<b>특징</b>: 어떤 브러시를 선택한 상태든 작업 중 Shift 키를 누르고 드래그하면 즉시 Smooth 브러시가 작동합니다."
+                ]
+              }
+            ]
           },
           {
             step: 4,
-            title: "일체형 메쉬(Join Ctrl+J) 및 바닥 받침대 통합",
-            desc: "3D 프린팅 시 피규어가 안정적으로 서 있도록 서포트용 미니 평평한 베이스 플레이트 통합"
+            title: "매테리얼 설정, 텍스처 페인팅 및 기초 리깅",
+            desc: "캐릭터에 색상을 입히고 직접 그려 넣은 뒤, 뼈대(Armature)를 심어 움직일 수 있게 만듭니다.",
+            subItems: [
+              {
+                subTitle: "① 매테리얼(Material) 설정하기",
+                subDesc: "캐릭터 표면의 기본적인 색상과 질감 데이터를 지정합니다.",
+                details: [
+                  "<b>방법</b>: 우측 Material Properties (지구본 아이콘) ➔ New 클릭",
+                  "<b>속성 조절</b>: Base Color에서 피부/옷 색상 지정, Roughness를 0.4 ~ 0.6 정도로 조절하여 매끄러운 광택 연출"
+                ]
+              },
+              {
+                subTitle: "② 텍스처 페인팅 (Texture Paint)",
+                subDesc: "캐릭터에 직접 붓질을 하여 볼터치, 눈썹, 의상 디자인 등의 디테일을 그립니다.",
+                details: [
+                  "<b>방법</b>: 상단 워크스페이스를 Texture Paint 탭으로 전환 ➔ Texture Slots에서 Base Color 텍스처(2048x2048) 추가",
+                  "<b>작업</b>: 브러시 툴을 이용해 3D 모델링 표면에 직접 세부 표현을 그려 넣습니다."
+                ]
+              },
+              {
+                subTitle: "③ 기초 리깅 (Rigging) 및 뼈대 연결하기",
+                subDesc: "캐릭터를 움직이기 위한 뼈대(Armature) 구조를 만들고 메쉬와 바인딩합니다.",
+                details: [
+                  "<b>뼈대 생성</b>: Shift + A ➔ Armature 생성 (Viewport Display ➔ In Front 체크하여 뼈가 보이게 설정)",
+                  "<img src=\"./images/armature_in_front.png\" alt=\"Armature In Front 설정\" style=\"max-width: 415px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<b>뼈대 확장</b>: Edit Mode에서 E (Extrude) 키를 이용해 척추, 머리, 팔, 다리 위치로 뼈대 확장",
+                  "<b>자동 웨이트 연결</b>: Object Mode에서 캐릭터 메쉬 ➔ Armature 순으로 선택 후 Ctrl + P ➔ With Automatic Weights 클릭",
+                  "<b>포즈 테스트</b>: Pose Mode로 전환하여 뼈를 선택하고 R (회전) 키를 눌러 정상 작동을 확인합니다."
+                ]
+              }
+            ]
+          },
+          {
+            step: 5,
+            title: "3D Print Toolbox를 활용한 모델링 검사 및 오류 수정",
+            desc: "3D Print Toolbox 애드온을 활용해 모델링의 터진 부분이나 겹친 요소 등 3D 출력 시 문제가 될 수 있는 오류를 검사하고 자동으로 수정합니다.",
+            subItems: [
+              {
+                subTitle: "① 3D Print Toolbox 애드온 활성화",
+                subDesc: "3D 출력 및 데이터 정리를 위한 블렌더 내장 공식 애드온을 활성화합니다.",
+                details: [
+                  "<b>방법</b>: 상단 메뉴 Edit ➔ Preferences ➔ Add-ons 탭으로 이동합니다.",
+                  "<b>설정</b>: 검색창에 3D Print Toolbox를 입력한 후 해당 체크박스를 활성화합니다."
+                ]
+              },
+              {
+                subTitle: "② 모델링 오류 검사 (Check All)",
+                subDesc: "캐릭터 메쉬의 구멍 난 면, 뚫린 점, 비매니폴드(Non-Manifold) 등 잠재적 오류를 정밀 검사합니다.",
+                details: [
+                  "<b>패널 열기</b>: 3D 뷰포트 우측 단축키 N 키를 눌러 사이드바의 3D Print 탭을 클릭합니다.",
+                  "<b>검사 실행</b>: Check All 버튼을 누릅니다. 구멍 난 면이나 겹친 요소(Solid, Non Manifold Edge 등)의 에러 개수가 목록에 표시됩니다."
+                ]
+              },
+              {
+                subTitle: "③ 오류 자동 수정 (Make Manifold)",
+                subDesc: "클릭 한 번으로 3D 출력에 유효한 메쉬 상태(Solid 메쉬)로 일괄 복구합니다.",
+                details: [
+                  "<b>실행</b>: Clean Up 항목 아래 of Make Manifold 버튼을 클릭합니다.",
+                  "<b>결과 확인</b>: 뒤집힌 면(Normal) 정렬, 뚫린 구멍 메우기, 겹친 면 정리 등이 자동으로 실행되어 출력이 가능한 완성형 3D 메쉬로 수정됩니다."
+                ]
+              }
+            ]
           }
         ],
         hotkeys: [
@@ -533,7 +689,6 @@ export const coursesData = [
         ],
         printTips: [
           "캐릭터의 튀어나온 팔이나 귀 부분은 FDM 3D 프린팅 시 서포터(Support) 생성이 필수적입니다.",
-          "메시 내부에 뚫린 빈 공간이 있으면 3D 슬라이서에서 슬라이싱 오류가 발생하므로 Watertight인지 확인하세요.",
           "스컬프팅 후 고용량 메쉬는 Decimate 모디파이어로 폴리곤 수를 줄여 STL 파일 용량을 최적화하세요."
         ]
       },
