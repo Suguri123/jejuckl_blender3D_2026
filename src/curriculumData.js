@@ -590,7 +590,24 @@ export const coursesData = [
             desc: "기본 형상이 완성된 캐릭터를 스컬프트 모드 브러시를 사용해 유기적이고 부드러운 형태로 다듬습니다.",
             subItems: [
               {
-                subTitle: "① 보셀 리메쉬(Voxel Remesh)로 면 구조 재정렬하기",
+                subTitle: "① 주요 스컬프트 브러시(Sculpt Brushes) 이해하기",
+                subDesc: "스컬프팅의 핵심인 주요 7가지 브러시의 작동 원리와 역할을 파악합니다.",
+                img: "./images/sculpt_brush_intro.png",
+                imgPos: "before-title",
+                imgWidth: "100%",
+                details: [
+                  "<b>1. Draw (드로우) 브러시</b><br>• <b>주요 기능</b>: 가장 기본적인 볼륨 추가/감소 브러시 (진흙을 얹듯 표면을 둥글게 튀어나오게 하거나 깎아냄)<br>• <b>단축키 팁</b>: Ctrl을 누른 채 드래그하면 표면이 반대로 파이게(Sub) 됩니다.",
+                  "<b>2. Clay Strips (클레이 스트립) 브러시</b><br>• <b>주요 기능</b>: 평평한 띠 형태로 진흙을 덧붙여 메쉬의 구조(면)를 잡아주는 기능",
+                  "<b>3. Grab (그랩) 브러시</b><br>• <b>주요 기능</b>: 메쉬의 전체적인 윤곽, 비율, 곡선을 한 번에 크게 변형 (범위 내의 면을 잡고 드래그)",
+                  "<b>4. Snake Hook (스네이크 훅) / Elastic Grab (엘라스틱 그랩) 브러시</b><br>• <b>주요 기능</b>: 특정 위치에서 유기적인 형태를 밖으로 길게 뽑아내는 기능 (뱀처럼 늘리거나 고무처럼 확장)",
+                  "<b>5. Smooth (스무스) 브러시</b><br>• <b>주요 기능</b>: 선택한 영역의 표면을 평평하고 미려하게 정돈 (울퉁불퉁한 표면이나 브러시 자국을 완화)<br>• <b>단축키 팁</b>: 어떤 브러시를 선택했든 작업 중 <b>Shift 키</b>를 누른 채 드래그하면 즉시 Smooth로 동작",
+                  "<b>6. Crease (크리스) 브러시</b><br>• <b>주요 기능</b>: 깊고 뾰족한 홈이나 날카로운 가장자리 경계선을 만드는 기능",
+                  "<b>7. Mask (마스크) 브러시</b><br>• <b>주요 기능</b>: 특정 부위만 고정하고 지정된 위치만 편집할 수 있도록 영역 보호 (검게 칠한 부위 보호)",
+                  "<div style=\"background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.6rem 0.9rem; margin-top: 0.5rem; font-size: 0.82rem; color: #334155;\"><p style=\"margin-bottom: 0.3rem; font-weight: 700; color: #0f172a;\">🔑 스컬프팅 핵심 단축키</p><ul style=\"list-style: disc; padding-left: 1.2rem; margin: 0;\"><li><b>마스크 칠하기</b>: <kbd style=\"background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;\">M</kbd> (또는 마스크 브러시 선택)</li><li><b>마스크 반전</b>: <kbd style=\"background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;\">Ctrl + I</kbd></li><li><b>마스크 해제</b>: <kbd style=\"background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;\">Alt + M</kbd></li></ul></div>"
+                ]
+              },
+              {
+                subTitle: "② 보셀 리메쉬(Voxel Remesh)로 면 구조 재정렬하기",
                 subDesc: "Bool Tool 결합 과정에서 얽힌 면(Topology)을 균일한 격자 구조로 재구성합니다.",
                 details: [
                   "<b>방법</b>: Sculpt Mode 상단 Remesh 메뉴 클릭 ➔ Voxel Size를 0.01 ~ 0.02로 설정",
@@ -598,14 +615,14 @@ export const coursesData = [
                 ]
               },
               {
-                subTitle: "② Grab 브러시 (단축키: G) 활용하기",
+                subTitle: "③ Grab 브러시 (단축키: G) 활용하기",
                 subDesc: "캐릭터의 전체적인 윤곽 and 곡선 표면을 당기거나 밀어서 유기적으로 변형합니다.",
                 details: [
                   "<b>활용</b>: 볼의 볼륨감, 턱선, 귀의 곡선, 팔다리의 매끄러운 연결부 등을 자연스럽게 잡아줍니다."
                 ]
               },
               {
-                subTitle: "③ Smooth 브러시 (단축키: Shift 누른 채 드래그) 활용하기",
+                subTitle: "④ Smooth 브러시 (단축키: Shift 누른 채 드래그) 활용하기",
                 subDesc: "울퉁불퉁하거나 리메쉬로 인해 거칠어진 표면을 부드럽게 매만집니다.",
                 details: [
                   "<b>특징</b>: 어떤 브러시를 선택한 상태든 작업 중 Shift 키를 누르고 드래그하면 즉시 Smooth 브러시가 작동합니다."
