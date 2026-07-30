@@ -253,7 +253,7 @@ export const coursesData = [
           {
             step: 6,
             title: "6. 텍스트 추가 및 3D 솔리드화",
-            desc: "Add > Text로 텍스트 오브젝트 생성 후 원하는 이름 입력, 메쉬로 변환해서 두께는 솔리드파이로 적용"
+            desc: "Add > Text로 텍스트 오브젝트 생성 후 원하는 이름 입력, 메쉬로 변환해서 두께는 솔리드파이로 적용<br/><br/><div style='margin-top: 10px; max-width: 560px;'><iframe width='100%' height='315' src='https://www.youtube.com/embed/BOjRwSiwtfc' title='네임택 제작 가이드 (4~6단계)' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='border-radius: 8px;'></iframe><p style='font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 8px; text-align: center;'>네임택 제작 영상 가이드 (4, 5, 6단계)</p></div>"
           }
         ],
         hotkeys: [
@@ -472,7 +472,7 @@ export const coursesData = [
           {
             step: 4,
             title: "스마트폰 거치대 모델링",
-            desc: "지금까지 배운 돌출, 인셋, 베벨 등의 모델링 기법들을 종합하여 3D 프린터로 출력할 수 있는 실용적인 스마트폰 거치대를 직접 만들어 봅니다."
+            desc: "지금까지 배운 돌출, 인셋, 베벨 등의 모델링 기법들을 종합하여 3D 프린터로 출력할 수 있는 실용적인 스마트폰 거치대를 직접 만들어 봅니다.<br/><br/><div style='margin-top: 10px; max-width: 560px;'><iframe width='100%' height='315' src='https://www.youtube.com/embed/Rsg-b_KfcP4' title='스마트폰 거치대 영상 튜토리얼' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='border-radius: 8px;'></iframe><p style='font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 8px; text-align: center;'>스마트폰 거치대 영상 튜토리얼</p></div>"
           }
         ],
         hotkeys: [
@@ -620,77 +620,12 @@ export const coursesData = [
                 details: [
                   "<b>활용</b>: 볼의 볼륨감, 턱선, 귀의 곡선, 팔다리의 매끄러운 연결부 등을 자연스럽게 잡아줍니다."
                 ]
-              },
-              {
+              },              {
                 subTitle: "④ Smooth 브러시 (단축키: Shift 누른 채 드래그) 활용하기",
                 subDesc: "울퉁불퉁하거나 리메쉬로 인해 거칠어진 표면을 부드럽게 매만집니다.",
                 details: [
-                  "<b>특징</b>: 어떤 브러시를 선택한 상태든 작업 중 Shift 키를 누르고 드래그하면 즉시 Smooth 브러시가 작동합니다."
-                ]
-              }
-            ]
-          },
-          {
-            step: 4,
-            title: "매테리얼 설정, 텍스처 페인팅 및 기초 리깅",
-            desc: "캐릭터에 색상을 입히고 직접 그려 넣은 뒤, 뼈대(Armature)를 심어 움직일 수 있게 만듭니다.",
-            subItems: [
-              {
-                subTitle: "① 매테리얼(Material) 설정하기",
-                subDesc: "캐릭터 표면의 기본적인 색상과 질감 데이터를 지정합니다.",
-                details: [
-                  "<b>방법</b>: 우측 Material Properties (지구본 아이콘) ➔ New 클릭",
-                  "<b>속성 조절</b>: Base Color에서 피부/옷 색상 지정, Roughness를 0.4 ~ 0.6 정도로 조절하여 매끄러운 광택 연출"
-                ]
-              },
-              {
-                subTitle: "② 텍스처 페인팅 (Texture Paint)",
-                subDesc: "캐릭터에 직접 붓질을 하여 볼터치, 눈썹, 의상 디자인 등의 디테일을 그립니다.",
-                details: [
-                  "<b>방법</b>: 상단 워크스페이스를 Texture Paint 탭으로 전환 ➔ Texture Slots에서 Base Color 텍스처(2048x2048) 추가",
-                  "<b>작업</b>: 브러시 툴을 이용해 3D 모델링 표면에 직접 세부 표현을 그려 넣습니다."
-                ]
-              },
-              {
-                subTitle: "③ 기초 리깅 (Rigging) 및 뼈대 연결하기",
-                subDesc: "캐릭터를 움직이기 위한 뼈대(Armature) 구조를 만들고 메쉬와 바인딩합니다.",
-                details: [
-                  "<b>뼈대 생성</b>: Shift + A ➔ Armature 생성 (Viewport Display ➔ In Front 체크하여 뼈가 보이게 설정)",
-                  "<img src=\"./images/armature_in_front.png\" alt=\"Armature In Front 설정\" style=\"max-width: 415px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
-                  "<b>뼈대 확장</b>: Edit Mode에서 E (Extrude) 키를 이용해 척추, 머리, 팔, 다리 위치로 뼈대 확장",
-                  "<b>자동 웨이트 연결</b>: Object Mode에서 캐릭터 메쉬 ➔ Armature 순으로 선택 후 Ctrl + P ➔ With Automatic Weights 클릭",
-                  "<b>포즈 테스트</b>: Pose Mode로 전환하여 뼈를 선택하고 R (회전) 키를 눌러 정상 작동을 확인합니다."
-                ]
-              }
-            ]
-          },
-          {
-            step: 5,
-            title: "3D Print Toolbox를 활용한 모델링 검사 및 오류 수정",
-            desc: "3D Print Toolbox 애드온을 활용해 모델링의 터진 부분이나 겹친 요소 등 3D 출력 시 문제가 될 수 있는 오류를 검사하고 자동으로 수정합니다.",
-            subItems: [
-              {
-                subTitle: "① 3D Print Toolbox 애드온 활성화",
-                subDesc: "3D 출력 및 데이터 정리를 위한 블렌더 내장 공식 애드온을 활성화합니다.",
-                details: [
-                  "<b>방법</b>: 상단 메뉴 Edit ➔ Preferences ➔ Add-ons 탭으로 이동합니다.",
-                  "<b>설정</b>: 검색창에 3D Print Toolbox를 입력한 후 해당 체크박스를 활성화합니다."
-                ]
-              },
-              {
-                subTitle: "② 모델링 오류 검사 (Check All)",
-                subDesc: "캐릭터 메쉬의 구멍 난 면, 뚫린 점, 비매니폴드(Non-Manifold) 등 잠재적 오류를 정밀 검사합니다.",
-                details: [
-                  "<b>패널 열기</b>: 3D 뷰포트 우측 단축키 N 키를 눌러 사이드바의 3D Print 탭을 클릭합니다.",
-                  "<b>검사 실행</b>: Check All 버튼을 누릅니다. 구멍 난 면이나 겹친 요소(Solid, Non Manifold Edge 등)의 에러 개수가 목록에 표시됩니다."
-                ]
-              },
-              {
-                subTitle: "③ 오류 자동 수정 (Make Manifold)",
-                subDesc: "클릭 한 번으로 3D 출력에 유효한 메쉬 상태(Solid 메쉬)로 일괄 복구합니다.",
-                details: [
-                  "<b>실행</b>: Clean Up 항목 아래 of Make Manifold 버튼을 클릭합니다.",
-                  "<b>결과 확인</b>: 뒤집힌 면(Normal) 정렬, 뚫린 구멍 메우기, 겹친 면 정리 등이 자동으로 실행되어 출력이 가능한 완성형 3D 메쉬로 수정됩니다."
+                  "<b>특징</b>: 어떤 브러시를 선택한 상태든 작업 중 Shift 키를 누르고 드래그하면 즉시 Smooth 브러시가 작동합니다.",
+                  "<div style='margin-top: 15px; max-width: 560px;'><iframe width='100%' height='315' src='https://www.youtube.com/embed/gnPrv9VSkEQ' title='스컬프팅 입문과정 영상 튜토리얼' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='border-radius: 8px;'></iframe><p style='font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 8px; text-align: center;'>미니 캐릭터 피규어 스컬프팅 영상 튜토리얼</p></div>"
                 ]
               }
             ]
@@ -717,30 +652,97 @@ export const coursesData = [
         objectType: "ai_ornament",
         outcomes: [
           "Text-to-3D / Image-to-3D Generative AI 도구를 이용한 3D 메쉬 생성 프로세스 이해",
-          "AI가 생성한 3D 메쉬의 3D 프린팅용 수리(Mesh Repair & Topology Cleanup)",
+          "AI가 생성한 3D 메쉬의 3D 출력용으로 수정(Mesh Repair & Topology Cleanup)",
           "Non-Manifold(비매니폴드 점/선) 자동 감지 및 3D Print Toolbox 애드온 활용",
-          "G-code 변환 슬라이서(Cura, PrusaSlicer) 연동 및 실제 출력 최적화 설정 완료"
+          "G-code 변환 슬라이서 연동 및 실제 출력 최적화 설정 완료"
         ],
         steps: [
           {
             step: 1,
             title: "Generative AI 도구로 3D 기본 모델 프롬프트 생성",
-            desc: "프롬프트 입력(예: 'Intricate Geometric Lotus Sculpture') 후 GLB/OBJ 파일 다운로드"
+            desc: "3D모델 생성후 STL/OBJ 파일로 다운로드<br/><br/><div style='background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.8rem 1rem; max-width: 560px; margin-top: 10px;'><h5 style='font-size: 0.9rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.6rem;'>🌐 주요 3D AI 모델링 생성 사이트</h5><ul style='list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;'><li>• <b>Meshy AI</b>: <a href='https://www.meshy.ai' target='_blank' rel='noopener noreferrer' style='color: #2563eb; font-weight: 600; text-decoration: underline;'>meshy.ai ↗</a></li><li>• <b>Tripo AI</b>: <a href='https://www.tripo3d.ai' target='_blank' rel='noopener noreferrer' style='color: #2563eb; font-weight: 600; text-decoration: underline;'>tripo3d.ai ↗</a></li><li>• <b>Hi3D AI</b>: <a href='https://hi3d.ai' target='_blank' rel='noopener noreferrer' style='color: #2563eb; font-weight: 600; text-decoration: underline;'>hi3d.ai ↗</a></li><li>• <b>Spline AI</b>: <a href='https://spline.design' target='_blank' rel='noopener noreferrer' style='color: #2563eb; font-weight: 600; text-decoration: underline;'>spline.design ↗</a></li></ul></div>"
           },
           {
             step: 2,
             title: "블렌더 임포트 및 3D Print Toolbox 에러 검사",
-            desc: "Import > GLB 후 'Check All'을 눌러 Non-manifold Edge, Bad Contig. Edges, Intersect Face 검출"
+            desc: "애드온을 활성화하고 메쉬의 오류(Non-Manifold 등)를 검사하여 3D 프린팅이 가능하도록 수리합니다.",
+            subItems: [
+              {
+                subTitle: "① 3D Print Toolbox 애드온 활성화",
+                subDesc: "블렌더에 기본 내장되어 있는 3D 프린팅 분석/검사 애드온을 활성화합니다.",
+                details: [
+                  "<b>활성화 방법</b>: Edit ➔ Preferences ➔ Add-ons 탭 선택",
+                  "우측 상단 검색창에 <b>'3D Print'</b> 입력 ➔ <b>'Mesh: 3D Print Toolbox'</b> 체크 박스 활성화",
+                  "<b>패널 호출</b>: 3D 뷰포트에서 단축키 <kbd style='background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;'>N</kbd>을 눌러 오른쪽 사이드바를 열고, <b>'3D Print'</b> 탭이 추가된 것을 확인합니다."
+                ]
+              },
+              {
+                subTitle: "② 모델링 검사 실행 (Check All)",
+                subDesc: "메쉬 구조의 치명적인 출력 불량 요소를 자동으로 검출합니다.",
+                details: [
+                  "검사하려는 오브젝트를 선택하고 3D Print 패널에서 <b>Check All</b> 버튼을 누릅니다.",
+                  "<b>Non-Manifold Edge (비매니폴드 엣지)</b>: 완전히 닫혀있지 않고 구멍이 뚫려 물이 샐 수 있는 열린 경계입니다. (3D 프린팅 시 정상 출력되지 않는 치명적 원인)",
+                  "<b>Bad Contiguous Edges (잘못 연속된 엣지)</b>: 인접 면들의 법선(Normal) 방향이 서로 달라 방향이 뒤집혀 일치하지 않는 부분입니다.",
+                  "<b>Intersect Face (교차하는 면)</b>: 메쉬 내부에서 면끼리 뚫고 들어가 겹쳐져 있어 슬라이서 프로그램이 내부/외부를 제대로 판별하기 어렵게 만드는 오류입니다."
+                ]
+              },
+              {
+                subTitle: "③ 오류 수정 및 메쉬 수리 (Repair)",
+                subDesc: "검사에서 발견된 문제점들을 브렌더 내장 기능으로 자동/수동 수리합니다.",
+                details: [
+                  "<b>자동 수리</b>: 3D Print 패널의 Clean Up 영역에서 <b>Make Manifold</b>를 클릭하면 터진 구멍을 메우고 노멀 방향을 자동 정렬해 줍니다.",
+                  "<b>수동 수리 (Edit Mode)</b>: 정밀 수리가 필요할 시 수동으로 보정합니다.",
+                  "• <b>중복 점 합치기</b>: <kbd style='background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;'>A</kbd>로 전체 선택 ➔ <kbd style='background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;'>M</kbd> ➔ <b>By Distance</b> 선택하여 겹쳐진 점 제거",
+                  "• <b>법선 재정렬</b>: <kbd style='background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;'>A</kbd>로 전체 선택 ➔ <kbd style='background:#e2e8f0; padding:0.1rem 0.3rem; border-radius:3px; font-weight:bold;'>Shift + N</kbd>을 눌러 면의 방향을 모두 겉 표면 방향(Outside)으로 재정렬"
+                ]
+              }
+            ]
           },
           {
             step: 3,
-            title: "Remesh & Solidify로 두께 및 와이어 프레임 강화",
-            desc: "AI 메쉬의 벽 두께가 너무 얇은 구역에 Solidify를 주어 3D 프린터 출력 도중 파손 방지"
+            title: "매테리얼 설정 및 텍스처 페인팅",
+            desc: "캐릭터에 색상을 입히고 직접 눈, 볼터치, 의상 등 세부 표현을 그려 넣습니다.<br/><br/><div style='border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; padding: 0.4rem; background: #fff; max-width: 500px;'><img src='./images/texture_painting_guide.png' alt='텍스처 페인팅 가이드' style='width: 100%; display: block; height: auto; object-fit: contain;' /></div>",
+            subItems: [
+              {
+                subTitle: "① 매테리얼(Material) 설정하기",
+                subDesc: "캐릭터 표면의 기본적인 색상과 질감 데이터를 지정합니다.",
+                details: [
+                  "<b>방법</b>: 우측 Material Properties (지구본 아이콘) ➔ New 클릭",
+                  "<b>속성 조절</b>: Base Color에서 피부/옷 색상 지정, Roughness를 0.4 ~ 0.6 정도로 조절하여 매끄러운 광택 연출"
+                ]
+              },
+              {
+                subTitle: "② 텍스처 페인팅 (Texture Paint)",
+                subDesc: "캐릭터에 직접 붓질을 하여 볼터치, 눈썹, 의상 디자인 등의 디테일을 그립니다.",
+                details: [
+                  "<b>방법</b>: 상단 워크스페이스를 Texture Paint 탭으로 전환 ➔ Texture Slots에서 Base Color 텍스처(2048x2048) 추가",
+                  "<b>작업</b>: 브러시 툴을 이용해 3D 모델링 표면에 직접 세부 표현을 그려 넣습니다."
+                ]
+              }
+            ]
           },
           {
             step: 4,
+            title: "기초 리깅 및 뼈대 연결",
+            desc: "캐릭터에 뼈대(Armature)를 심어 움직이고 자세를 바꿀 수 있도록 리깅 작업을 진행합니다.",
+            subItems: [
+              {
+                subTitle: "① 기초 리깅 (Rigging) 및 뼈대 연결하기",
+                subDesc: "캐릭터를 움직이기 위한 뼈대(Armature) 구조를 만들고 메쉬와 바인딩합니다.",
+                details: [
+                  "<b>뼈대 생성</b>: Shift + A ➔ Armature 생성 (Viewport Display ➔ In Front 체크하여 뼈가 보이게 설정)",
+                  "<img src=\"./images/armature_in_front.png\" alt=\"Armature In Front 설정\" style=\"max-width: 415px; width: 100%; border-radius: 6px; border: 1px solid #e2e8f0; margin: 0.4rem 0 0.8rem 0; display: block;\" />",
+                  "<b>뼈대 확장</b>: Edit Mode에서 E (Extrude) 키를 이용해 척추, 머리, 팔, 다리 위치로 뼈대 확장",
+                  "<b>자동 웨이트 연결</b>: Object Mode에서 캐릭터 메쉬 ➔ Armature 순으로 선택 후 Ctrl + P ➔ With Automatic Weights 클릭",
+                  "<b>포즈 테스트</b>: Pose Mode로 전환하여 뼈를 선택하고 R (회전) 키를 눌러 정상 작동을 확인합니다."
+                ]
+              }
+            ]
+          },
+          {
+            step: 5,
             title: "STL 내보내기 & 슬라이싱 세팅 점검",
-            desc: "File > Export > Stl (.stl) 선택, Selection Only 및 Apply Modifiers 체크 후 슬라이서로 전송"
+            desc: "File > Export > Stl (.stl) 선택, Selection Only(선택만) 및 Apply Modifiers 체크 후 슬라이서로 전송"
           }
         ],
         hotkeys: [
@@ -752,8 +754,7 @@ export const coursesData = [
         ],
         printTips: [
           "AI 모델은 미세한 얇은 섬유 구조가 포함될 수 있습니다. 3D 프린터 노즐 두께(0.4mm) 이상의 최소 벽두께(1.0mm)를 유지하세요.",
-          "출력 전 슬라이서 레이어 뷰(Layer View)에서 허공에 출력되는 공중 레이어가 없는지 층별 축소 검사를 시행합니다.",
-          "라이트 레진(SLA) 프린팅 시에는 수축을 고려한 배수 구멍(Drain Hole)을 제작해 주세요."
+          "출력 전 슬라이서 레이어 뷰(Layer View)에서 허공에 출력되는 공중 레이어가 없는지 층별 축소 검사를 시행합니다."
         ]
       }
     ]

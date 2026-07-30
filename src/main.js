@@ -46,7 +46,7 @@ function renderSidebarCourses() {
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
           const cleanTitle = lesson.title.replace(/^[0-9]+차시:\s*/, '');
-          const isUnderConstruction = lesson.id === 4;
+          const isUnderConstruction = false;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="nav-item ${isUnderConstruction ? 'disabled' : ''}" 
@@ -94,7 +94,7 @@ function renderOverviewCards() {
       </div>
       <div class="lessons-grid">
         ${course.lessons.map(lesson => {
-          const isUnderConstruction = lesson.id === 4;
+          const isUnderConstruction = false;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
@@ -137,11 +137,7 @@ function handleHashChange() {
     currentCourseId = courseId;
     currentLessonId = lessonId || 1;
 
-    if (currentLessonId === 4) {
-      alert("준비 중인 차시입니다.");
-      window.location.hash = 'overview';
-      return;
-    }
+
 
     // Open target course accordion
     const targetAccordion = document.getElementById(`accordion-${currentCourseId}`);
