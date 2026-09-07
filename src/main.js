@@ -1,6 +1,7 @@
 import { createIcons, icons } from 'lucide';
-import { coursesData, printingChecklistData, installStepsData } from './curriculumData.js';
+import { coursesData, printingChecklistData, installStepsData, slicerGuidesData, practicePrintersData } from './curriculumData.js';
 import { ThreeViewer } from './threeViewer.js';
+import { initGlobalSearch } from './search.js';
 
 let viewer = null;
 let currentCourseId = coursesData[0].id;
@@ -19,12 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Render Dynamic Sidebar Courses & Overview Cards
   renderSidebarCourses();
   renderOverviewCards();
+  renderSlicerGuide();
   renderInstallGuide();
   renderChecklist();
 
   // 4. Setup Event Listeners & Router
   setupSidebarToggle();
   setupEventListeners();
+  initGlobalSearch();
 
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
@@ -45,7 +48,7 @@ function renderSidebarCourses() {
       </div>
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
-          const cleanTitle = lesson.title.replace(/^[0-9]+차시:\s*/, '');
+          const cleanTitle = lesson.title.replace(/^[0-9]+(차시|회차):\s*/, '');
           const isUnderConstruction = false;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
@@ -54,7 +57,7 @@ function renderSidebarCourses() {
                data-course="${course.id}"
                data-lesson="${lesson.id}"
                ${isUnderConstruction ? 'onclick="alert(\'준비 중인 차시입니다.\'); return false;"' : ''}>
-              <div class="nav-badge">${lesson.id}차시</div>
+              <div class="nav-badge">${lesson.id}회차</div>
               <div class="nav-label-box">
                 <span class="nav-title">${cleanTitle}${isUnderConstruction ? ' <span class="status-badge-preparing">준비중</span>' : ''}</span>
                 <span class="nav-sub">${lesson.subtitle}</span>
@@ -99,7 +102,7 @@ function renderOverviewCards() {
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
                ${isUnderConstruction ? 'onclick="alert(\'준비 중인 차시입니다.\'); return false;"' : ''}>
-              <div class="quick-num">${lesson.id}차시 실습 ${isUnderConstruction ? '(준비중)' : ''}</div>
+              <div class="quick-num">${lesson.id}회차 실습 ${isUnderConstruction ? '(준비중)' : ''}</div>
               <h3>${lesson.subtitle}</h3>
               <p>${lesson.title}</p>
               <span class="quick-link">${isUnderConstruction ? '준비 중입니다' : '학습 시작하기 →'}</span>
@@ -154,6 +157,10 @@ function handleHashChange() {
 
     updateLessonContent(currentCourseId, currentLessonId);
 
+  } else if (hash === 'slicer-guide') {
+    const activeNav = document.querySelector('.nav-item[data-target="slicer-guide"]');
+    if (activeNav) activeNav.classList.add('active');
+    document.getElementById('view-slicer-guide')?.classList.add('active');
   } else if (hash === 'install-guide') {
     const activeNav = document.querySelector('.nav-item[data-target="install-guide"]');
     if (activeNav) activeNav.classList.add('active');
@@ -175,6 +182,423 @@ function handleHashChange() {
 
   closeMobileSidebar();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+let activeSlicerKey = 'bambu';
+
+function renderSlicerGuide() {
+  const container = document.getElementById('slicer-guide-container');
+  if (!container || !slicerGuidesData) return;
+
+  const { intro, slicers, commonSettings, troubleshootingTips } = slicerGuidesData;
+  const bambu = slicers.bambu;
+  const cubicon = slicers.cubicon;
+
+  container.innerHTML = `
+    <!-- 1. Slicer Introduction & Core Roles -->
+    <div class="slicer-intro-card">
+      <div class="slicer-intro-header">
+        <div class="slicer-intro-badge">
+          <i data-lucide="layers"></i>
+          <span>핵심 개념 이해</span>
+        </div>
+        <h3>${intro.title}</h3>
+        <p>${intro.desc}</p>
+      </div>
+
+      <!-- 3D Printing & Slicing Process Infographic Box -->
+      <div class="slicer-diagram-box">
+        <div class="slicer-diagram-topbar">
+          <div class="slicer-diagram-tag-box">
+            <span class="diagram-tag">3D 프린팅 & 슬라이싱 5단계 워크플로우</span>
+          </div>
+        </div>
+
+        <div class="slicer-diagram-headline">
+          <h4>3D 모델링(Blender) ➔ 데이터 변환(STL) ➔ 3D 슬라이싱(G-code) ➔ 3D 프린터 출력 ➔ 피규어 후가공</h4>
+        </div>
+
+        <div class="slicer-diagram-img-wrap">
+          <img id="slicer-process-img" src="./images/slicer_process_infographic.jpg" alt="3D 프린팅 및 슬라이싱 5단계 워크플로우 과정" class="slicer-diagram-img" loading="lazy" />
+        </div>
+
+        <div class="slicer-diagram-caption">
+          <i data-lucide="info"></i>
+          <span><b>3D 슬라이서(Slicer)의 핵심 역할</b>: 컴퓨터 속의 3차원 다각형 메시(STL)를 3D 프린터 하드웨어가 층층이(Layer by Layer) 노즐로 녹여 쌓아 올릴 수 있도록 2D 단면 경로 및 G-code 명령어로 연산·변환해 주는 필수 소프트웨어 단계입니다.</span>
+        </div>
+      </div>
+
+      <div class="slicer-roles-grid">
+        ${intro.coreRole.map(role => `
+          <div class="slicer-role-item">
+            <div class="slicer-role-icon">
+              <i data-lucide="${role.icon}"></i>
+            </div>
+            <div class="slicer-role-text">
+              <h4>${role.title}</h4>
+              <p>${role.desc}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- 2. Practice-Supported 3D Printers Section -->
+    <div class="practice-printers-section">
+      <div class="slicer-section-title">
+        <i data-lucide="printer"></i>
+        <h3>실습 지원 3D프린터</h3>
+        <span class="sub-desc">교육장 및 메이커스페이스에 비치된 실제 3D 프린터 하드웨어 보유 현황입니다. (뱀부랩 2대 · 큐비콘 3대)</span>
+      </div>
+
+      <div class="practice-printers-grid">
+        ${practicePrintersData.map(printer => `
+          <div class="practice-printer-card" style="border-top: 4px solid ${printer.badgeColor};">
+            <div class="printer-card-top">
+              <div class="printer-brand-box">
+                <div class="printer-logo-badge" style="background: ${printer.badgeColor};">
+                  <i data-lucide="${printer.icon}"></i>
+                </div>
+                <div>
+                  <span class="printer-brand">${printer.brand}</span>
+                  <h4 class="printer-model">${printer.model}</h4>
+                </div>
+              </div>
+              ${printer.countBadge ? `
+                <span class="printer-count-pill" style="background: ${printer.badgeColor}15; color: ${printer.badgeColor}; border: 1px solid ${printer.badgeColor}40;">
+                  ${printer.countBadge}
+                </span>
+              ` : ''}
+            </div>
+
+            <div class="printer-type-tag">
+              <i data-lucide="cpu"></i>
+              <span>${printer.type}</span>
+            </div>
+
+            ${printer.image ? `
+              <div class="printer-img-wrap">
+                <img src="${printer.image}" alt="${printer.model} 실물 장비" class="printer-card-img" loading="lazy" />
+              </div>
+            ` : ''}
+
+            <div class="printer-features">
+              <div class="features-label">장비 주요 특장점</div>
+              <ul>
+                ${printer.features.map(f => `<li><i data-lucide="check-circle-2"></i><span>${f}</span></li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="printer-card-bottom">
+              <div class="printer-role-box">
+                <span class="role-value">${printer.role}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- 3. Dual Slicer Overview & Download Cards -->
+    <div class="slicer-comparison-section">
+      <div class="slicer-section-title">
+        <i data-lucide="download-cloud"></i>
+        <h3>실습 지원 3D 슬라이서 다운로드</h3>
+        <span class="sub-desc">보유 장비(뱀부랩 P2S 2대, 큐비콘 Style NEO-A22C 3대)에 맞춰 최신 공식 슬라이서를 설치하세요.</span>
+      </div>
+
+      <div class="slicer-cards-grid">
+        <!-- Bambu Studio Card -->
+        <div class="slicer-card bambu-card">
+          <div class="slicer-card-top">
+            <div class="slicer-brand-box">
+              <div class="slicer-logo-badge" style="background: linear-gradient(135deg, #00ae42, #10b981);">
+                <i data-lucide="zap"></i>
+              </div>
+              <div>
+                ${bambu.vendor ? `<span class="slicer-vendor">${bambu.vendor}</span>` : ''}
+                <h4 class="slicer-name">${bambu.name}</h4>
+              </div>
+            </div>
+            ${bambu.badge ? `<span class="slicer-pill" style="background: rgba(0, 174, 66, 0.12); color: #008f36; border: 1px solid rgba(0, 174, 66, 0.3);">${bambu.badge}</span>` : ''}
+          </div>
+
+          <p class="slicer-desc">${bambu.desc}</p>
+
+          <div class="slicer-specs">
+            <div class="spec-row">
+              <span class="spec-label">지원 기종</span>
+              <span class="spec-value">${bambu.printers.join(', ')}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">지원 OS</span>
+              <span class="spec-value">${bambu.osSupport}</span>
+            </div>
+          </div>
+
+          <div class="slicer-highlights">
+            <div class="highlight-title">주요 특장점</div>
+            <ul>
+              ${bambu.highlights.map(h => `<li><i data-lucide="check-circle-2"></i><span>${h}</span></li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="slicer-actions">
+            <a href="${bambu.downloadUrl}" target="_blank" rel="noopener noreferrer" class="btn-slicer-primary btn-bambu">
+              <i data-lucide="download"></i>
+              <span>공식 다운로드 (Windows / Mac)</span>
+            </a>
+            <button type="button" class="btn-slicer-secondary btn-jump-guide" data-slicer="bambu">
+              <i data-lucide="chevron-right"></i>
+              <span>뱀부 설치 가이드 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cubicon Slicer Card -->
+        <div class="slicer-card cubicon-card">
+          <div class="slicer-card-top">
+            <div class="slicer-brand-box">
+              <div class="slicer-logo-badge" style="background: linear-gradient(135deg, #0284c7, #2563eb);">
+                <i data-lucide="box"></i>
+              </div>
+              <div>
+                ${cubicon.vendor ? `<span class="slicer-vendor">${cubicon.vendor}</span>` : ''}
+                <h4 class="slicer-name">${cubicon.name}</h4>
+              </div>
+            </div>
+            ${cubicon.badge ? `<span class="slicer-pill" style="background: rgba(2, 132, 199, 0.12); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.3);">${cubicon.badge}</span>` : ''}
+          </div>
+
+          <p class="slicer-desc">${cubicon.desc}</p>
+
+          <div class="slicer-specs">
+            <div class="spec-row">
+              <span class="spec-label">지원 기종</span>
+              <span class="spec-value">${cubicon.printers.join(', ')}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">지원 OS</span>
+              <span class="spec-value">${cubicon.osSupport}</span>
+            </div>
+          </div>
+
+          <div class="slicer-highlights">
+            <div class="highlight-title">주요 특장점</div>
+            <ul>
+              ${cubicon.highlights.map(h => `<li><i data-lucide="check-circle-2"></i><span>${h}</span></li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="slicer-actions">
+            <a href="${cubicon.downloadUrl}" target="_blank" rel="noopener noreferrer" class="btn-slicer-primary btn-cubicon">
+              <i data-lucide="download"></i>
+              <span>Cubicreator 공식 다운로드</span>
+            </a>
+            <button type="button" class="btn-slicer-secondary btn-jump-guide" data-slicer="cubicon">
+              <i data-lucide="chevron-right"></i>
+              <span>Cubicreator 설치 가이드 보기</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Interactive Step-by-Step Installation Tabs -->
+    <div class="slicer-tabs-container" id="slicer-steps-section">
+      <div class="slicer-tabs-header">
+        <div class="tabs-title-group">
+          <i data-lucide="wrench"></i>
+          <div>
+            <h3>슬라이서 단계별 설치 & 환경 설정 가이드</h3>
+            <p>소프트웨어 인스톨부터 초기 노즐/베드 설정 및 첫 슬라이싱까지 순서대로 따라 해보세요.</p>
+          </div>
+        </div>
+
+        <div class="slicer-tab-buttons" role="tablist">
+          <button type="button" class="slicer-tab-btn ${activeSlicerKey === 'bambu' ? 'active' : ''}" data-tab="bambu">
+            <i data-lucide="zap"></i>
+            <span>뱀부 스튜디오 (Bambu Studio)</span>
+          </button>
+          <button type="button" class="slicer-tab-btn ${activeSlicerKey === 'cubicon' ? 'active' : ''}" data-tab="cubicon">
+            <i data-lucide="box"></i>
+            <span>Cubicreator (큐비크리에이터)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content: Step Cards -->
+      <div id="slicer-steps-content" class="slicer-steps-content">
+        <!-- Rendered dynamically by updateSlicerSteps() -->
+      </div>
+    </div>
+
+    <!-- 4. Essential Slicer Parameters Cheat Sheet -->
+    <div class="slicer-settings-section">
+      <div class="slicer-section-title">
+        <i data-lucide="sliders"></i>
+        <h3>3D 모델 출력 필수 슬라이서 설정</h3>
+        <span class="sub-desc">블렌더 모델링의 디테일과 내구성을 살리기 위한 6대 핵심 파라미터 최적값입니다.</span>
+      </div>
+
+      <div class="settings-table-wrapper">
+        <table class="slicer-settings-table">
+          <thead>
+            <tr>
+              <th style="width: 15%;">출력 파라미터</th>
+              <th style="width: 37%;">파라미터 의미 & 설명</th>
+              <th style="width: 16%;">권장 설정값</th>
+              <th style="width: 32%;">설정 이유 & 주의사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${commonSettings.map(set => `
+              <tr>
+                <td class="param-name font-bold">${set.param}</td>
+                <td class="param-desc">${set.desc}</td>
+                <td class="param-recom"><span class="recom-badge">${set.recommended}</span></td>
+                <td class="param-why">${set.importance}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. 3D Print Failure Prevention & Troubleshooting -->
+    <div class="slicer-troubleshoot-section">
+      <div class="slicer-section-title">
+        <i data-lucide="alert-triangle"></i>
+        <h3>3D 프린팅 출력 실패 방지 트러블슈팅 (Troubleshooting)</h3>
+        <span class="sub-desc">슬라이싱 및 첫 출력 과정에서 자주 마주치는 4대 오류 원인과 즉각적인 해결법입니다.</span>
+      </div>
+
+      <div class="troubleshoot-grid">
+        ${troubleshootingTips.map((tip, idx) => `
+          <div class="troubleshoot-card">
+            <div class="troubleshoot-header">
+              <span class="troubleshoot-num">문제 #${idx + 1}</span>
+              <h4>${tip.issue}</h4>
+            </div>
+            <div class="troubleshoot-body">
+              <div class="tb-item tb-cause">
+                <span class="tb-tag">발생 원인</span>
+                <p>${tip.cause}</p>
+              </div>
+              <div class="tb-item tb-sol">
+                <span class="tb-tag">해결 방법</span>
+                <p>${tip.solution}</p>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Scroll Top Button -->
+    <div class="scroll-top-box" style="margin-top: 2rem;">
+      <button id="btn-scroll-top-slicer" class="btn-scroll-top">
+        <i data-lucide="arrow-up-circle"></i>
+        <span>맨 위로 올라가기</span>
+      </button>
+    </div>
+  `;
+
+  // Render initial step list for active tab
+  updateSlicerSteps(activeSlicerKey);
+
+  // Tab Button Click Listeners
+  container.querySelectorAll('.slicer-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabKey = btn.getAttribute('data-tab');
+      if (tabKey && tabKey !== activeSlicerKey) {
+        activeSlicerKey = tabKey;
+        container.querySelectorAll('.slicer-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateSlicerSteps(activeSlicerKey);
+      }
+    });
+  });
+
+  // Jump to guide buttons
+  container.querySelectorAll('.btn-jump-guide').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetSlicer = btn.getAttribute('data-slicer');
+      if (targetSlicer) {
+        activeSlicerKey = targetSlicer;
+        container.querySelectorAll('.slicer-tab-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-tab') === targetSlicer);
+        });
+        updateSlicerSteps(activeSlicerKey);
+        const stepsSection = document.getElementById('slicer-steps-section');
+        if (stepsSection) {
+          stepsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // Scroll to top button
+  const btnScroll = document.getElementById('btn-scroll-top-slicer');
+  if (btnScroll) {
+    btnScroll.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  createIcons({ icons });
+}
+
+function updateSlicerSteps(slicerKey) {
+  const contentEl = document.getElementById('slicer-steps-content');
+  if (!contentEl || !slicerGuidesData) return;
+
+  const currentSlicer = slicerGuidesData.slicers[slicerKey];
+  if (!currentSlicer) return;
+
+  contentEl.innerHTML = `
+    <div class="slicer-steps-banner" style="border-left: 4px solid ${currentSlicer.badgeColor};">
+      <div class="banner-badge" style="background: ${currentSlicer.badgeColor}; color: #ffffff;">
+        ${currentSlicer.shortName}
+      </div>
+      <div class="banner-info">
+        <h4>${currentSlicer.name} - 단계별 설치 및 환경 구성</h4>
+        <p>${currentSlicer.desc}</p>
+      </div>
+    </div>
+
+    <div class="slicer-steps-grid">
+      ${currentSlicer.steps.map(step => `
+        <div class="slicer-step-card" id="step-${currentSlicer.id}-${step.step}">
+          <div class="slicer-step-header">
+            <span class="slicer-step-pill">STEP ${step.step}</span>
+            <h4>${step.title}</h4>
+          </div>
+          <div class="slicer-step-body">
+            <p class="slicer-step-desc">${step.desc}</p>
+
+            ${step.link ? `
+              <div class="slicer-step-link-box">
+                <a href="${step.link}" target="_blank" rel="noopener noreferrer" class="slicer-direct-btn">
+                  <i data-lucide="external-link"></i>
+                  <span>${step.linkText || '공식 다운로드 링크'}</span>
+                </a>
+              </div>
+            ` : ''}
+
+            ${step.tip ? `
+              <div class="slicer-pro-tip">
+                <div class="tip-badge"><i data-lucide="help-circle"></i><span>핵심 팁</span></div>
+                <div class="tip-text">${step.tip}</div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  createIcons({ icons });
 }
 
 function renderInstallGuide() {
@@ -223,7 +647,7 @@ function updateLessonContent(courseId, lessonId) {
 
   // Breadcrumbs
   document.getElementById('current-course-name').innerText = course.title;
-  document.getElementById('current-lesson-name').innerText = `${lesson.id}차시: ${lesson.subtitle}`;
+  document.getElementById('current-lesson-name').innerText = `${lesson.id}회차: ${lesson.subtitle}`;
 
   // Content
   document.getElementById('current-badge').innerText = lesson.badge;

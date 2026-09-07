@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D프린팅을 위한 블렌더 3D모델링 기초 과정 | Blender3D Workshop</title>
-  <meta name="description" content="블렌더(Blender) 기초 3D 모델링, 생성형 AI 3D 파이프라인 및 3D 프린팅 실전 출력을 위한 전문 교육 사이트" />
+  <title>AI와 블렌더를 활용한 3D 캐릭터 굿즈 모델링 & 시제품 제작 | Blender3D Workshop</title>
+  <meta name="description" content="AI와 블렌더를 활용한 3D 캐릭터 굿즈 모델링, 생성형 AI 파이프라인 및 시제품 3D 프린팅 실전 과정을 위한 전문 교육 사이트" />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,14 +27,44 @@
           </div>
           <div class="brand-text">
             <span class="title">Blender3D Workshop</span>
-            <span class="sub">3D모델링 & 3D프린팅 전문 과정</span>
+            <span class="sub">3D 캐릭터 굿즈 & 시제품 제작</span>
           </div>
         </div>
       </div>
 
       <div class="header-right">
+        <!-- Global Search Bar -->
+        <div class="site-search-wrap" id="site-search-wrap">
+          <div class="search-bar">
+            <i data-lucide="search" class="search-bar-icon"></i>
+            <input 
+              type="text" 
+              id="global-search-input" 
+              class="search-bar-input" 
+              placeholder="전체 내용 검색 (단축키, 기능, 실습...)" 
+              aria-label="전체 내용 검색"
+              autocomplete="off" 
+            />
+            <button type="button" id="btn-clear-search" class="btn-clear-search" aria-label="검색어 지우기" style="display: none;">
+              <i data-lucide="x"></i>
+            </button>
+            <kbd class="search-kbd-hint">/</kbd>
+          </div>
+          
+          <!-- Dropdown Results -->
+          <div id="search-dropdown" class="search-dropdown" style="display: none;">
+            <div class="search-dropdown-header">
+              <span id="search-results-count" class="search-results-count">검색 결과 0건</span>
+              <span class="search-dropdown-tip"><kbd>ESC</kbd> 닫기</span>
+            </div>
+            <div id="search-dropdown-list" class="search-dropdown-list" role="listbox">
+              <!-- JS rendered results -->
+            </div>
+          </div>
+        </div>
+
         <button id="btn-open-hotkeys" class="btn-hotkeys">
-          <i data-lucide="keyboard"></i> 블렌더 단축키
+          <i data-lucide="keyboard"></i> <span>블렌더 단축키</span>
         </button>
       </div>
     </header>
@@ -52,6 +82,10 @@
           <a href="#install-guide" class="nav-item" data-target="install-guide">
             <i data-lucide="download-cloud"></i>
             <span>블렌더 설치 및 언어 설정</span>
+          </a>
+          <a href="#slicer-guide" class="nav-item" data-target="slicer-guide">
+            <i data-lucide="printer"></i>
+            <span>3D 슬라이서 설치 (뱀부 스튜디오 · Cubicreator)</span>
           </a>
         </div>
 
@@ -85,10 +119,10 @@
               <span class="dot pulse"></span>
             </div>
             <h1 class="hero-title">
-              3D프린팅을 위한 <span class="text-gradient">블렌더 3D모델링</span> 교육 커리큘럼
+              <span class="text-gradient">AI와 블렌더를 활용한 3D 캐릭터 굿즈 모델링</span> & 시제품 제작
             </h1>
             <p class="hero-desc">
-              왼쪽 메뉴에서 교육 코스를 선택하고 각 차시별 <strong>3D 인터랙티브 뷰어</strong>, <strong>단계별 실습 가이드</strong> 및 <strong>3D 프린터 실전 출력을 학습하세요.
+              왼쪽 메뉴에서 교육 코스를 선택하고 각 차시별 <strong>3D 인터랙티브 뷰어</strong>, <strong>단계별 실습 가이드</strong> 및 <strong>3D 프린터 실전 출력을 학습하세요.</strong>
             </p>
           </div>
 
@@ -110,21 +144,34 @@
           </div>
         </section>
 
+        <!-- 3D Slicer Install Guide View -->
+        <section id="view-slicer-guide" class="content-view">
+          <div class="section-header">
+            <span class="section-tag">3D 프린팅 출력 사전 준비</span>
+            <h2>3D 슬라이서 설치 및 환경 설정 (뱀부 스튜디오 · Cubicreator)</h2>
+            <p>블렌더에서 모델링한 3D 모델(STL/3MF)를 3D 프린터가 출력할 수 있는 적층 코드(G-Code)로 변환하는 필수 슬라이서 소프트웨어 설치 및 초기 설정 가이드입니다.</p>
+          </div>
+
+          <div id="slicer-guide-container" class="slicer-guide-container">
+            <!-- JS Rendered Slicer Guide Content -->
+          </div>
+        </section>
+
         <!-- Lesson Interactive View (1~4차시 공용 샌드박스) -->
         <section id="view-lesson" class="content-view">
           <div class="course-breadcrumb">
-            <span id="current-course-name">3D프린팅을 위한 블렌더 3D모델링 기초 과정</span>
+            <span id="current-course-name">AI와 블렌더를 활용한 3D 캐릭터 굿즈 모델링 & 시제품 제작</span>
             <i data-lucide="chevron-right"></i>
-            <span id="current-lesson-name">1차시: 네임택 모델링</span>
+            <span id="current-lesson-name">1회차: 3D 열쇠고리 제작</span>
           </div>
 
           <div class="workspace-grid">
             <!-- Left Panel: Lesson Guide & Steps -->
             <div class="panel lesson-info-panel">
               <div class="panel-header">
-                <div class="badge-tag" id="current-badge">1차시 파운데이션</div>
-                <h2 id="current-title">1차시: 블렌더 인터페이스 & 3D 공간 기본 개념</h2>
-                <p id="current-subtitle" class="subtitle">3D프린팅용 네임택 모델링</p>
+                <div class="badge-tag" id="current-badge">1회차 / 기초 3D 모델링</div>
+                <h2 id="current-title">1회차: 블렌더 기초 3D 모델링</h2>
+                <p id="current-subtitle" class="subtitle">3D 열쇠고리 제작 (화면 구성 & 기초 모델링·모디파이어)</p>
               </div>
 
               <div class="info-block">
