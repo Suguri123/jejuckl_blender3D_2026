@@ -49,7 +49,7 @@ function renderSidebarCourses() {
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
           const cleanTitle = lesson.title.replace(/^[0-9]+(차시|회차):\s*/, '');
-          const isUnderConstruction = false;
+          const isUnderConstruction = lesson.id >= 2;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="nav-item ${isUnderConstruction ? 'disabled' : ''}" 
@@ -97,7 +97,7 @@ function renderOverviewCards() {
       </div>
       <div class="lessons-grid">
         ${course.lessons.map(lesson => {
-          const isUnderConstruction = false;
+          const isUnderConstruction = lesson.id >= 2;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
@@ -139,6 +139,12 @@ function handleHashChange() {
 
     currentCourseId = courseId;
     currentLessonId = lessonId || 1;
+
+    if (currentLessonId >= 2) {
+      alert('준비 중인 차시입니다.');
+      window.location.hash = '#overview';
+      return;
+    }
 
 
 
@@ -190,6 +196,7 @@ function renderSlicerGuide() {
   const container = document.getElementById('slicer-guide-container');
   if (!container || !slicerGuidesData) return;
 
+  const base = import.meta.env.BASE_URL;
   const { intro, slicers, commonSettings, troubleshootingTips } = slicerGuidesData;
   const bambu = slicers.bambu;
   const cubicon = slicers.cubicon;
@@ -219,7 +226,7 @@ function renderSlicerGuide() {
         </div>
 
         <div class="slicer-diagram-img-wrap">
-          <img id="slicer-process-img" src="./images/slicer_process_infographic.jpg" alt="3D 프린팅 및 슬라이싱 5단계 워크플로우 과정" class="slicer-diagram-img" loading="lazy" />
+          <img id="slicer-process-img" src="${base}images/slicer_process_infographic.jpg" alt="3D 프린팅 및 슬라이싱 5단계 워크플로우 과정" class="slicer-diagram-img" loading="lazy" />
         </div>
 
         <div class="slicer-diagram-caption">
@@ -278,7 +285,7 @@ function renderSlicerGuide() {
 
             ${printer.image ? `
               <div class="printer-img-wrap">
-                <img src="${printer.image}" alt="${printer.model} 실물 장비" class="printer-card-img" loading="lazy" />
+                <img src="${printer.image.startsWith('./') ? base + printer.image.slice(2) : printer.image}" alt="${printer.model} 실물 장비" class="printer-card-img" loading="lazy" />
               </div>
             ` : ''}
 
