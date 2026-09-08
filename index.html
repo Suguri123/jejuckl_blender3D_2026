@@ -291,6 +291,19 @@
         </div>
       </div>
     </div>
+
+    <!-- Image Preview Lightbox Modal -->
+    <div id="image-modal" class="modal-backdrop hidden">
+      <div class="modal-content image-modal-dialog">
+        <div class="modal-header">
+          <h3 id="image-modal-title"><i data-lucide="image"></i> <span>Bambu Studio 실행화면 확대 미리보기</span></h3>
+          <button id="btn-close-image-modal" class="btn-close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body image-modal-body">
+          <img id="image-modal-img" src="" alt="확대 이미지" />
+        </div>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>

@@ -54,7 +54,7 @@ export function buildSearchIndex() {
   // 1. Courses and Lessons
   coursesData.forEach(course => {
     course.lessons.forEach(lesson => {
-      if (lesson.id >= 2) return; // 2~4회차 비활성화
+      if (lesson.id >= 3) return; // 3~4회차 비활성화
       // Lesson Summary
       index.push({
         id: `lesson-${course.id}-${lesson.id}`,
@@ -248,6 +248,42 @@ export function buildSearchIndex() {
           hash: 'slicer-guide',
           selector: '#slicer-steps-section'
         });
+      });
+
+      // Bambu Studio Execution Screen
+      index.push({
+        id: 'bambu-studio-preview',
+        category: '3D 슬라이서 (뱀부 스튜디오)',
+        badge: 'Bambu Studio 화면',
+        badgeClass: 'badge-slicer-bambu',
+        title: 'Bambu Studio 실행화면 (슬라이서 메인 인터페이스)',
+        content: 'Bambu Studio 뱀부 스튜디오 실행화면 슬라이서 메인 인터페이스 P2S 0.4 노즐 텍스처 PEI 플레이트 서포트 설정 슬라이스 준비 화면',
+        hash: 'slicer-guide',
+        selector: '#bambu-studio-preview'
+      });
+
+      // Bambu Studio 5-Step Operation Guide
+      index.push({
+        id: 'bambu-studio-workflow-guide',
+        category: '3D 슬라이서 (뱀부 스튜디오)',
+        badge: '5단계 조작 가이드',
+        badgeClass: 'badge-slicer-bambu',
+        title: 'Bambu Studio 슬라이서 조작 5단계 핵심 가이드',
+        content: '프린터 선택 3D모델 선택 상세 모델 설정 층높이 설정 상세 출력 설정 품질 강도 속도 서포트 5단계 워크플로우',
+        hash: 'slicer-guide',
+        selector: '#bambu-studio-workflow-guide'
+      });
+
+      // Online Free 3D Models Direct Import
+      index.push({
+        id: 'bambu-online-models-section',
+        category: '3D 슬라이서 (온라인 모델)',
+        badge: '온라인 무료 모델',
+        badgeClass: 'badge-slicer-bambu',
+        title: '온라인 무료 3D 모델 뱀부스튜디오에서 바로 불러오기 (MakerWorld 연동)',
+        content: '온라인 무료 3D 모델 뱀부스튜디오 바로 불러오기 MakerWorld 메이커월드 다운로드 및 열기 피규어 플레이트 자동 로드 원클릭 슬라이스',
+        hash: 'slicer-guide',
+        selector: '#bambu-online-models-section'
       });
     }
 

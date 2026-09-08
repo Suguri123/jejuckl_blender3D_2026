@@ -49,7 +49,7 @@ function renderSidebarCourses() {
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
           const cleanTitle = lesson.title.replace(/^[0-9]+(차시|회차):\s*/, '');
-          const isUnderConstruction = lesson.id >= 2;
+          const isUnderConstruction = lesson.id >= 3;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="nav-item ${isUnderConstruction ? 'disabled' : ''}" 
@@ -97,7 +97,7 @@ function renderOverviewCards() {
       </div>
       <div class="lessons-grid">
         ${course.lessons.map(lesson => {
-          const isUnderConstruction = lesson.id >= 2;
+          const isUnderConstruction = lesson.id >= 3;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
@@ -140,7 +140,7 @@ function handleHashChange() {
     currentCourseId = courseId;
     currentLessonId = lessonId || 1;
 
-    if (currentLessonId >= 2) {
+    if (currentLessonId >= 3) {
       alert('준비 중인 차시입니다.');
       window.location.hash = '#overview';
       return;
@@ -440,7 +440,41 @@ function renderSlicerGuide() {
       </div>
     </div>
 
-    <!-- 4. Essential Slicer Parameters Cheat Sheet -->
+    <!-- 4. Bambu Studio Software Screen Showcase -->
+    <div class="slicer-screen-section" id="bambu-studio-preview">
+      <div class="slicer-section-title">
+        <i data-lucide="monitor"></i>
+        <h3>Bambu Studio 실행화면 (슬라이서 메인 인터페이스)</h3>
+        <span class="sub-desc">실제 교육용 Bambu Lab P2S 3D 프린터 및 텍스처 PEI 플레이트 환경의 뱀부 스튜디오 슬라이서 실행 화면입니다.</span>
+      </div>
+
+      <div class="slicer-screen-card">
+        <div class="slicer-screen-topbar">
+          <div class="slicer-screen-tags">
+            <span class="screen-tag-bambu"><i data-lucide="zap"></i> Bambu Studio</span>
+            <span class="screen-tag-printer"><i data-lucide="printer"></i> Bambu Lab P2S (0.4mm Nozzle)</span>
+            <span class="screen-tag-plate"><i data-lucide="layers"></i> Textured PEI Plate</span>
+          </div>
+          <span class="screen-zoom-hint"><i data-lucide="maximize-2"></i> 클릭하여 원본 크게 보기</span>
+        </div>
+
+        <div class="slicer-screen-img-wrap" id="btn-zoom-bambu-screen" title="클릭하여 원본 크게 보기">
+          <img id="bambu-screen-img" src="${base}images/bambu_studio_screen.png" alt="Bambu Studio 실행화면 (슬라이서 메인 인터페이스)" class="slicer-screen-img" loading="lazy" />
+          <div class="slicer-screen-hover-overlay">
+            <span class="screen-hover-badge"><i data-lucide="zoom-in"></i> 원본 크기로 확대 보기</span>
+          </div>
+        </div>
+
+        <div class="slicer-screen-caption">
+          <i data-lucide="info"></i>
+          <div>
+            <b>Bambu Studio UI 구성 & 파라미터 가이드</b>: 좌측 패널의 [프린터 / 필라멘트 / 프로세스] 영역에서 바로 아래 <b>'3D 모델 출력 필수 슬라이서 설정'</b>의 권장 값(0.20mm 표준 레이어 높이, 인필 15~20%, 외벽 2~3회, 트리 서포트 등)을 손쉽게 설정하고, 중앙 3D 뷰포트에서 모델의 안착 상태와 서포트 형성을 직관적으로 확인합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Essential Slicer Parameters Cheat Sheet -->
     <div class="slicer-settings-section">
       <div class="slicer-section-title">
         <i data-lucide="sliders"></i>
@@ -472,7 +506,149 @@ function renderSlicerGuide() {
       </div>
     </div>
 
-    <!-- 5. 3D Print Failure Prevention & Troubleshooting -->
+    <!-- 6. Bambu Studio 5-Step Essential Operation Guide -->
+    <div class="slicer-screen-section" id="bambu-studio-workflow-guide">
+      <div class="slicer-section-title">
+        <i data-lucide="list-ordered"></i>
+        <h3>Bambu Studio 슬라이서 조작 5단계 핵심 가이드</h3>
+        <span class="sub-desc">3D 모델 파일 임포트부터 프린터 매핑, 상세 모델 설정, 층높이 및 출력 파라미터 지정까지의 5대 핵심 순서입니다.</span>
+      </div>
+
+      <div class="slicer-screen-card">
+        <div class="slicer-screen-topbar">
+          <div class="slicer-screen-tags">
+            <span class="screen-tag-bambu"><i data-lucide="check-circle-2"></i> 핵심 조작 순서</span>
+            <span class="screen-tag-printer">①~⑤단계 프로세스 맵</span>
+            <span class="screen-tag-plate">Bambu Lab P2S</span>
+          </div>
+          <span class="screen-zoom-hint"><i data-lucide="maximize-2"></i> 클릭하여 원본 크게 보기</span>
+        </div>
+
+        <div class="slicer-screen-img-wrap zoomable-img-wrap" data-title="Bambu Studio 슬라이서 조작 5단계 핵심 가이드" title="클릭하여 원본 크게 보기">
+          <img src="${base}images/bambu_studio_step_guide.png" alt="Bambu Studio 슬라이서 조작 5단계 핵심 가이드" class="slicer-screen-img" loading="lazy" />
+          <div class="slicer-screen-hover-overlay">
+            <span class="screen-hover-badge"><i data-lucide="zoom-in"></i> 원본 크기로 확대 보기</span>
+          </div>
+        </div>
+
+        <div class="slicer-workflow-steps-grid">
+          <div class="workflow-step-badge-card">
+            <span class="wf-num">①</span>
+            <div class="wf-info">
+              <b>프린터 선택</b>
+              <p>교육장 보유 기종인 Bambu Lab P2S, 0.4mm 노즐 및 텍스처 PEI 플레이트를 지정합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step-badge-card">
+            <span class="wf-num">②</span>
+            <div class="wf-info">
+              <b>3D모델(출력 파일) 선택</b>
+              <p>상단의 [추가 (Ctrl+I)] 버튼을 누르거나 작업 뷰포트로 STL/3MF 파일을 드래그합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step-badge-card">
+            <span class="wf-num">③</span>
+            <div class="wf-info">
+              <b>상세 모델 설정</b>
+              <p>상단 도구 모음을 통해 모델 크기(Scale), 회전, 자동 배치, 서포트 그리기 및 컬러를 지정합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step-badge-card">
+            <span class="wf-num">④</span>
+            <div class="wf-info">
+              <b>층높이(Layer Height) 설정</b>
+              <p>출력 디테일에 맞춰 0.20mm Standard 또는 0.12mm Fine 레이어 프로파일을 선택합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step-badge-card">
+            <span class="wf-num">⑤</span>
+            <div class="wf-info">
+              <b>상세 출력 설정</b>
+              <p>[품질], [강도](인필/외벽), [속도], [서포트](트리 서포트) 탭에서 최적 파라미터를 확정합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Online Free 3D Models Direct Import in Bambu Studio -->
+    <div class="slicer-screen-section" id="bambu-online-models-section">
+      <div class="slicer-section-title">
+        <i data-lucide="cloud-download"></i>
+        <h3>온라인 무료 3D 모델 뱀부스튜디오에서 바로 불러오기 (MakerWorld 연동)</h3>
+        <span class="sub-desc">별도의 웹 서핑이나 복잡한 파일 변환 없이, 뱀부스튜디오 내부에서 수많은 온라인 무료 3D 모델을 원클릭으로 탐색하고 슬라이서에 즉시 불러올 수 있습니다.</span>
+      </div>
+
+      <!-- Feature Highlight Banner -->
+      <div class="slicer-online-feature-banner">
+        <div class="feature-banner-icon">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <div class="feature-banner-text">
+          <h4>💡 온라인 무료 3D 모델 원클릭 다이렉트 로드 기능</h4>
+          <p>
+            <b>온라인에 있는 다양한 무료 3D 모델(피규어, 캐릭터, 실생활 굿즈 등)을 뱀부스튜디오에서 바로 검색하고 원클릭으로 불러올 수 있습니다.</b><br />
+            웹 브라우저를 따로 열어 파일을 다운로드하고 압축을 풀 필요 없이, 슬라이서 내 [온라인 모델] 탭에서 원하는 모델을 골라 [다운로드 및 열기]를 클릭하면 작업 화면의 빌드 플레이트로 자동 배치되어 즉시 슬라이싱과 출력이 가능합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="slicer-online-models-flow">
+        <!-- Step 1: Search & One-Click Download -->
+        <div class="slicer-online-step-card">
+          <div class="slicer-screen-topbar">
+            <div class="slicer-screen-tags">
+              <span class="screen-tag-bambu"><i data-lucide="search"></i> 1단계: 온라인 무료 모델 탐색</span>
+              <span class="screen-tag-printer">키워드 검색 (예: 피규어)</span>
+              <span class="screen-tag-plate">원클릭 [다운로드 및 열기]</span>
+            </div>
+            <span class="screen-zoom-hint"><i data-lucide="maximize-2"></i> 클릭하여 원본 크게 보기</span>
+          </div>
+
+          <div class="slicer-screen-img-wrap zoomable-img-wrap" data-title="온라인 무료 모델 검색 및 [다운로드 및 열기]" title="클릭하여 원본 크게 보기">
+            <img src="${base}images/bambu_online_model_search.png" alt="온라인 무료 모델 검색 및 다운로드 및 열기" class="slicer-screen-img" loading="lazy" />
+            <div class="slicer-screen-hover-overlay">
+              <span class="screen-hover-badge"><i data-lucide="zoom-in"></i> 원본 크기로 확대 보기</span>
+            </div>
+          </div>
+
+          <div class="slicer-screen-caption">
+            <i data-lucide="info"></i>
+            <div>
+              <b>① 온라인 무료 모델 검색 & [다운로드 및 열기]</b>: 뱀부스튜디오 홈 화면의 좌측 메뉴에서 <b>[온라인 모델]</b> 탭을 클릭한 뒤, 상단 검색창에 <i>피규어</i> 등의 키워드를 입력합니다. 마음에 드는 무료 모델을 선택하면 나타나는 팝업에서 우측 하단의 초록색 <b>[다운로드 및 열기]</b> 버튼을 누릅니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Loaded directly onto Build Plate -->
+        <div class="slicer-online-step-card">
+          <div class="slicer-screen-topbar">
+            <div class="slicer-screen-tags">
+              <span class="screen-tag-bambu"><i data-lucide="box"></i> 2단계: 슬라이서 플레이트 자동 로드</span>
+              <span class="screen-tag-printer">3D 모델 자동 배치 완료</span>
+              <span class="screen-tag-plate">[플레이트 슬라이스] 준비</span>
+            </div>
+            <span class="screen-zoom-hint"><i data-lucide="maximize-2"></i> 클릭하여 원본 크게 보기</span>
+          </div>
+
+          <div class="slicer-screen-img-wrap zoomable-img-wrap" data-title="온라인 모델이 뱀부스튜디오 빌드 플레이트에 자동 로드된 모습" title="클릭하여 원본 크게 보기">
+            <img src="${base}images/bambu_online_model_loaded.png" alt="온라인 모델이 뱀부스튜디오 빌드 플레이트에 자동 로드된 모습" class="slicer-screen-img" loading="lazy" />
+            <div class="slicer-screen-hover-overlay">
+              <span class="screen-hover-badge"><i data-lucide="zoom-in"></i> 원본 크기로 확대 보기</span>
+            </div>
+          </div>
+
+          <div class="slicer-screen-caption">
+            <i data-lucide="check-circle"></i>
+            <div>
+              <b>② 빌드 플레이트 자동 안착 & 슬라이싱 준비 완료</b>: 다운로드 완료 즉시 뱀부스튜디오의 3D 작업 화면으로 자동 전환되며, 선택한 피규어 모델이 <b>빌드 플레이트 위에 자동으로 안착</b>됩니다. 레이어 높이, 외벽 수, 인필 등 슬라이서 옵션을 확인한 후 우측 상단의 <b>[플레이트 슬라이스]</b>를 클릭하여 바로 출력할 수 있습니다. <b>설정을 변경해도 됩니다.</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. 3D Print Failure Prevention & Troubleshooting -->
     <div class="slicer-troubleshoot-section">
       <div class="slicer-section-title">
         <i data-lucide="alert-triangle"></i>
@@ -552,6 +728,27 @@ function renderSlicerGuide() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  // Zoom preview click for all zoomable images in slicer guide
+  const zoomableWraps = container.querySelectorAll('.zoomable-img-wrap, #btn-zoom-bambu-screen');
+  const imageModal = document.getElementById('image-modal');
+  const imageModalImg = document.getElementById('image-modal-img');
+  const imageModalTitle = document.getElementById('image-modal-title');
+
+  zoomableWraps.forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const img = wrap.querySelector('img');
+      const title = wrap.getAttribute('data-title') || img?.getAttribute('alt') || '이미지 확대 미리보기';
+      if (img && imageModal && imageModalImg) {
+        imageModalImg.src = img.src;
+        if (imageModalTitle) {
+          imageModalTitle.innerHTML = `<i data-lucide="image"></i> <span>${title}</span>`;
+        }
+        imageModal.classList.remove('hidden');
+        createIcons({ icons });
+      }
+    });
+  });
 
   createIcons({ icons });
 }
@@ -740,8 +937,16 @@ function updateLessonContent(courseId, lessonId) {
   `).join('');
 
   // Print Tips
+  const tipsBox = document.querySelector('.print-tips-box');
   const tipsEl = document.getElementById('current-print-tips');
-  tipsEl.innerHTML = lesson.printTips.map(t => `<li>${t}</li>`).join('');
+  if (tipsBox && tipsEl) {
+    if (lesson.printTips && lesson.printTips.length > 0) {
+      tipsBox.style.display = '';
+      tipsEl.innerHTML = lesson.printTips.map(t => `<li>${t}</li>`).join('');
+    } else {
+      tipsBox.style.display = 'none';
+    }
+  }
 
   // Quick Hotkeys
   const hotkeysEl = document.getElementById('quick-hotkeys');
@@ -853,6 +1058,36 @@ function setupEventListeners() {
       renderModalHotkeys(e.target.value.toLowerCase());
     });
   }
+
+  // Image Lightbox Modal handlers
+  const imageModal = document.getElementById('image-modal');
+  const btnCloseImageModal = document.getElementById('btn-close-image-modal');
+
+  if (btnCloseImageModal && imageModal) {
+    btnCloseImageModal.addEventListener('click', () => {
+      imageModal.classList.add('hidden');
+    });
+  }
+
+  if (imageModal) {
+    imageModal.addEventListener('click', (e) => {
+      if (e.target === imageModal) {
+        imageModal.classList.add('hidden');
+      }
+    });
+  }
+
+  // Close modals on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modal && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+      }
+      if (imageModal && !imageModal.classList.contains('hidden')) {
+        imageModal.classList.add('hidden');
+      }
+    }
+  });
 }
 
 function renderModalHotkeys(filterText) {

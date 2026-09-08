@@ -374,7 +374,7 @@ export const coursesData = [
         outcomes: [
           "생성형 AI(Text-to-3D, Image-to-3D)를 활용한 3D 캐릭터 초안 메쉬 생성 프로세스 이해",
           "블렌더 3D Print Toolbox를 활용한 Non-Manifold 에러 검출 및 출력 최적화 수리",
-          "Mirror Modifier(대칭)와 Bool Tool을 활용한 캐릭터 기본 체형 구성",
+          "Bool Tool 애드온 활성화 및 불리언(Union/Difference) 연산을 활용한 메쉬 결합",
           "Sculpt Mode의 핵심 7대 브러시 조형과 Voxel Remesh로 유기적인 이목구비·디테일 보정",
           "실습예제 : 내부 중공(Hollow) 및 LED 조명 모듈 결합 홀을 갖춘 3D 캐릭터 조명(무드등) 모델링"
         ],
@@ -388,10 +388,10 @@ export const coursesData = [
                 subTitle: "① 주요 3D 생성 AI 서비스 플랫폼 비교 및 활용",
                 subDesc: "목적에 맞는 생성형 AI 도구를 선택하여 캐릭터 굿즈 프로토타입을 신속하게 도출합니다.",
                 details: [
-                  "<b>Meshy AI (<a href='https://www.meshy.ai' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>meshy.ai ↗</a>)</b>: 텍스트 또는 2D 캐릭터 일러스트를 입력하여 고품질 텍스처와 함께 3D 메쉬를 생성합니다.",
+                  "<b>Meshy AI (<a href='https://www.meshy.ai' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>meshy.ai ↗</a>)</b>: 텍스트 또는 2D 캐릭터 일러스트를 입력하여 고품질 텍스처와 함께 3D 메쉬를 생성합니다. 대화형 AI 에이전트(Agent) 기능을 지원하여 자연어 프롬프트로 형태 수정, 파츠 편집, 리텍스처링 등을 대화하듯 제어할 수 있습니다.",
                   "<b>Tripo3D (<a href='https://www.tripo3d.ai' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>tripo3d.ai ↗</a>)</b>: 몇 초 만에 빠른 속도로 3D 메쉬 초안을 뽑아내어 아이디어 브레인스토밍에 최적화되어 있습니다.",
-                  "<b>Hi3D AI (<a href='https://hi3d.ai' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>hi3d.ai ↗</a>) & Spline AI (<a href='https://spline.design' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>spline.design ↗</a>)</b>: 다양한 스타일의 3D 조형물 및 에셋 생성 지원",
-                  "<b>프롬프트 작성 팁</b>: 3D 프린팅에 유리하도록 'chibi cute character, solid base, clean geometry, watertight, no thin floating parts' 등의 키워드를 추가합니다."
+                  "<b>Hi3D AI (<a href='https://hi3d.ai' target='_blank' rel='noopener noreferrer' style='color:#2563eb; font-weight:600;'>hi3d.ai ↗</a>)</b>: 다양한 스타일의 3D 조형물 및 에셋 생성 지원",
+                  "<div style='margin-top: 14px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;'><div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;'><div style='background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>Meshy AI</div><img src='./images/ai_platform_meshy.png' alt='Meshy AI 작업화면' style='width: 100%; height: auto; border-radius: 4px; display: block; object-fit: cover;' /></div><div style='background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>Tripo3D</div><img src='./images/ai_platform_tripo.png' alt='Tripo3D 작업화면' style='width: 100%; height: auto; border-radius: 4px; display: block; object-fit: cover;' /></div><div style='background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>Hi3D AI</div><img src='./images/ai_platform_hi3d.png' alt='Hi3D AI 작업화면' style='width: 100%; height: auto; border-radius: 4px; display: block; object-fit: cover;' /></div></div></div>"
                 ]
               }
             ]
@@ -405,7 +405,8 @@ export const coursesData = [
                 subTitle: "① 3D Print Toolbox 애드온 활성화",
                 subDesc: "Edit ➔ Preferences ➔ Add-ons ➔ '3D Print' 검색 후 'Mesh: 3D Print Toolbox' 체크박스를 켭니다.",
                 details: [
-                  "3D 뷰포트에서 단축키 <b>N</b> 키를 눌러 우측 사이드바의 <b>3D Print</b> 탭을 엽니다."
+                  "3D 뷰포트에서 단축키 <b>N</b> 키를 눌러 우측 사이드바의 <b>3D Print</b> 탭을 엽니다.",
+                  "<div style='margin-top: 10px; display: flex; gap: 12px; flex-wrap: wrap; max-width: 480px;'><div style='flex: 1; min-width: 170px; max-width: 220px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>3D Print 패널 (Check All)</div><img src='./images/3d_print_toolbox_panel.png' alt='3D Print 패널' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div><div style='flex: 1; min-width: 170px; max-width: 220px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>검사 결과 및 Clean Up</div><img src='./images/3d_print_toolbox_result.png' alt='3D Print 검사 결과' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div></div>"
                 ]
               },
               {
@@ -425,33 +426,47 @@ export const coursesData = [
           },
           {
             step: 3,
-            title: "3. 캐릭터 기본 체형 구성 & 미러(Mirror) 모디파이어",
-            desc: "블렌더 내에서 캐릭터의 머리, 몸통, 팔, 다리 등의 기본 체형을 배치하고 대칭 모디파이어로 조형의 균형을 잡습니다.",
+            title: "3. Bool Tool 애드온 설치 및 활용",
+            desc: "블렌더 기본 내장 애드온인 Bool Tool을 활성화하여 복잡한 불리언(Boolean) 연산을 단축키와 전용 메뉴로 손쉽게 수행할 수 있도록 설정합니다.",
             subItems: [
               {
-                subTitle: "① 참조 이미지(Reference) 배치 및 불투명도 조절",
-                subDesc: "Shift + A ➔ Image ➔ Reference로 캐릭터 디자인 시안을 뷰포트에 불러오고 Opacity를 0.3으로 설정합니다.",
-                img: "./images/reference_image_setting.png",
-                imgWidth: "70%"
-              },
-              {
-                subTitle: "② 기본 메쉬 배치 및 다리 미러 모디파이어 적용",
-                subDesc: "머리/몸통(UV Sphere), 다리(Cylinder)를 배치하고 Mirror Modifier(기준: 몸통 중심)를 적용하여 완벽한 좌우 대칭을 구현합니다.",
-                img: "./images/mirror_origin_1_final.png",
-                imgWidth: "65%"
-              },
-              {
-                subTitle: "③ Bool Tool (Auto Boolean Union) 병합",
-                subDesc: "다리, 몸통, 머리를 차례로 선택하고 단축키 N ➔ Edit ➔ Bool Tool ➔ Union으로 겹친 내부 면 없이 깔끔한 단일 메쉬로 병합합니다.",
+                subTitle: "① Bool Tool 애드온 활성화",
+                subDesc: "Edit(편집) ➔ Preferences(환경 설정) ➔ Add-ons(애드온)에서 'Bool Tool'을 검색하고 체크박스를 활성화합니다.",
                 img: "./images/bool_tool_setting.png",
-                imgWidth: "70%"
+                imgWidth: "75%",
+                details: [
+                  "상단 메뉴 <b>Edit ➔ Preferences</b>를 실행합니다.",
+                  "좌측 목록에서 <b>애드온(Add-ons)</b> 탭을 클릭한 뒤 검색창에 <b>Bool</b>을 입력합니다.",
+                  "검색 결과로 나타나는 <b>Bool Tool</b> 체크박스를 활성화(체크)합니다."
+                ]
+              },
+              {
+                subTitle: "② Bool Tool 패널 메뉴 확인 (N 사이드바)",
+                subDesc: "3D 뷰포트에서 단축키 N을 눌러 우측 사이드바의 Edit(편집) 탭을 열면 나타나는 Bool Tool(불리언) 메뉴를 확인합니다.",
+                img: "./images/bool_tool_menu.png",
+                imgWidth: "75%",
+                details: [
+                  "<b>Auto Boolean</b>: 모디파이어를 거치지 않고 즉시 메쉬를 병합/차집합하여 단일 메쉬로 만듭니다.",
+                  "<b>Brush Boolean</b>: 비파괴 방식으로 모디파이어를 생성하여 이후에도 형태나 위치를 수정할 수 있습니다.",
+                  "<b>주요 연산 기능</b>: Union(합집합 - 여러 파츠를 단일 덩어리로 결합), Difference(차집합 - 타공 및 구멍 뚫기), Intersect(교집합), Slice(분할)"
+                ]
+              },
+              {
+                subTitle: "③ 불리언 핵심 단축키 및 3D 출력 최적화 팁",
+                subDesc: "오브젝트들을 선택한 후 단축키를 이용해 빠르고 정확하게 메쉬 결합 및 타공 작업을 진행합니다.",
+                details: [
+                  "<b>Auto Boolean 핵심 단축키</b> (Numpad 키패드 사용):",
+                  "• <b>Union (합집합)</b>: 메쉬 다중 선택 ➔ <b>Ctrl + Shift + Numpad +</b> (내부 간섭면 없이 단일 메쉬로 완벽 병합)",
+                  "• <b>Difference (차집합)</b>: 타공 도구 선택 ➔ 대상 오브젝트 Shift 선택 ➔ <b>Ctrl + Shift + Numpad -</b> (깔끔한 구멍 가공)",
+                  "<b>3D 프린팅 최적화 팁</b>: 여러 파츠(머리, 몸통, 악세서리 등)가 겹쳐진 모델은 슬라이서에서 내부 결함이 발생할 수 있으므로, Auto Boolean Union으로 병합하면 겹치는 내부 면(Intersect Face)이 완벽하게 정리되어 에러 없는 매니폴드 모델이 완성됩니다."
+                ]
               }
             ]
           },
           {
             step: 4,
             title: "4. 스컬프트 모드(Sculpt Mode) 브러시 활용 및 디테일 보정",
-            desc: "점토를 빚듯 자유롭게 변형하는 스컬프트 모드로 전환하여 캐릭터의 이목구비, 귀, 볼륨감을 다듬고 보셀 리메쉬로 표면을 정돈합니다.",
+            desc: "점토를 빚듯 자유롭게 변형하는 스컬프트 모드로 전환하여 캐릭터의 이목구비, 귀, 볼륨감을 다듬고 리메시로 표면을 정돈합니다.",
             subItems: [
               {
                 subTitle: "① 스컬프트 모드 7대 핵심 브러시 마스터",
@@ -460,16 +475,20 @@ export const coursesData = [
                 imgWidth: "100%"
               },
               {
-                subTitle: "② 마스크와 Snake Hook으로 귀/팔 돌출시키기",
-                subDesc: "M 키로 마스크를 칠하고 Ctrl + I로 반전한 뒤 Snake Hook 브러시로 당겨 귀와 팔의 형태를 유기적으로 만듭니다.",
-                img: "./images/sculpt_mode_enter.png",
-                imgWidth: "60%"
-              },
-              {
-                subTitle: "③ 보셀 리메쉬 (Voxel Remesh: Ctrl + R)",
-                subDesc: "면이 늘어나 깨진 부분을 균일한 사각형 격자로 재정렬합니다. (Voxel Size: 0.015 설정 후 Ctrl + R)",
+                subTitle: "② 리메시",
+                subDesc: "면이 늘어나 깨지거나 왜곡된 메쉬를 균일한 사각형 격자로 재정렬합니다. 모디파이어를 이용하는 비파괴 방식과 스컬프트 모드 우측 상단에서 복셀 크기를 조절하여 리메시하는 방법을 다룹니다.",
                 details: [
-                  "<div style='margin-top: 15px; max-width: 560px;'><iframe width='100%' height='315' src='https://www.youtube.com/embed/gnPrv9VSkEQ' title='캐릭터 스컬프팅 튜토리얼' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='border-radius: 8px;'></iframe><p style='font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 8px; text-align: center;'>캐릭터 스컬프팅 실전 가이드 영상</p></div>"
+                  "<b>1) 모디파이어를 이용한 리메시 (Remesh Modifier)</b>",
+                  "• <b>경로</b>: 오브젝트 선택 ➔ 우측 <b>Modifier Properties(렌치 아이콘)</b> ➔ <b>모디파이어 추가 ➔ Remesh(리메시)</b>",
+                  "• <b>모드 선택</b>: 블록(Blocks), 스무스(Smooth), 샤프(Sharp), 복셀(Voxel) 등 원하는 조형 스타일에 맞게 선택합니다.",
+                  "• <b>비파괴 방식</b>: 원본 메쉬를 손상시키지 않고 실시간으로 수치를 조절하며 미리볼 수 있으며, 마음에 들면 <b>Apply(적용)</b>하여 메쉬를 확정합니다.",
+                  "<div style='margin-top: 10px; margin-bottom: 12px; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;'><div style='flex: 1; min-width: 170px; max-width: 250px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>모디파이어 추가 ➔ 생성 ➔ 리메시</div><img src='./images/remesh_modifier_menu.png' alt='리메시 모디파이어 선택' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div><div style='flex: 1; min-width: 170px; max-width: 250px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>리메시 모디파이어 설정 패널</div><img src='./images/voxel_remesh_3.png' alt='리메시 모디파이어 설정' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div></div>",
+                  "<b>2) 스컬프트 모드 우측 상단 복셀 크기 조절 및 리메시</b>",
+                  "• <b>경로</b>: 스컬프트 모드 상단 헤더 우측의 <b>Remesh(리메시)</b> 드롭다운 메뉴를 엽니다.",
+                  "• <b>복셀 크기(Voxel Size) 조절</b>: 수치를 낮출수록 더욱 촘촘하고 정밀한 고해상도 메쉬 격자가 생성됩니다. (권장: 0.015 ~ 0.02)",
+                  "• <b>단축키 R</b>: 뷰포트에 십자 격자 가이드가 표시되어 마우스 드래그로 복셀 크기를 직관적으로 조절할 수 있습니다.",
+                  "• <b>단축키 Ctrl + R</b>: 설정한 복셀 크기로 표면 메쉬 전체를 즉시 균일하게 재정렬(Remesh 실행)합니다.",
+                  "<br><b>3D 프린팅 팁</b>: 브러시 작업으로 늘어난 면이나 미세한 구멍이 리메시를 통해 완벽한 닫힌 매니폴드(Watertight) 메쉬로 자동 수리되어 슬라이싱 에러를 방지합니다."
                 ]
               }
             ]
@@ -480,25 +499,27 @@ export const coursesData = [
             desc: "완성된 캐릭터 메쉬를 실제 빛이 투과하는 무드등으로 제작하기 위해 내부를 비우고(Hollow), 바닥에 LED 모듈 결합 홀을 뚫어줍니다.",
             subItems: [
               {
-                subTitle: "① 내부 비우기 (Solidify Modifier 두께 설정)",
-                subDesc: "조명 불빛이 은은하게 투과되도록 캐릭터 외벽 두께를 일정하게 유지하면서 속을 비워냅니다.",
+                subTitle: "① 내부 비우기 (2가지 방식)",
+                subDesc: "조명 불빛이 은은하게 투과되도록 캐릭터 외벽 두께를 일정하게 유지하면서 속을 비워냅니다. 모디파이어를 이용하는 방법과 3D Print 애드온의 Hollow 기능을 이용하는 방법이 있습니다.",
                 details: [
-                  "<b>방법</b>: 캐릭터 선택 ➔ Modifier Properties ➔ Solidify 추가 ➔ Thickness를 1.6mm ~ 2.0mm로 지정합니다. (빛 투과와 조형 강도의 최적 밸런스)"
+                  "<b>방법 1. Solidify 모디파이어 활용</b>: 캐릭터 선택 ➔ Modifier Properties ➔ Solidify 추가 ➔ Thickness를 1.6mm ~ 2.0mm로 지정합니다. (빛 투과와 조형 강도의 최적 밸런스)",
+                  "<b>방법 2. 3D Print 애드온 Hollow 기능 활용</b>: N 사이드바 ➔ 3D Print ➔ 편집 ➔ 모델 선택 후 <b>Hollow</b> 클릭 ➔ 오프셋(Offset)을 1.0 ~ 1.5로 지정하면 내부가 정밀하게 비워집니다.",
+                  "<div style='margin-top: 10px; margin-bottom: 8px; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;'><div style='flex: 1; min-width: 160px; max-width: 230px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>3D Print ➔ 편집 ➔ Hollow 설정</div><img src='./images/hollow_setting.png' alt='Hollow 설정 창' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div><div style='flex: 1; min-width: 160px; max-width: 230px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>Hollow 적용 후 내부 비움 결과</div><img src='./images/hollow_result.png' alt='Hollow 결과 화면' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div><div style='flex: 1; min-width: 160px; max-width: 230px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>X-Ray 토글 (Alt + Z: 내부 투시)</div><img src='./images/xray_toggle.png' alt='X-Ray 토글' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div></div>"
                 ]
               },
               {
                 subTitle: "② 바닥면 LED 티라이트/조명 모듈 결합 홈 타공",
-                subDesc: "시중의 원형 미니 LED 모듈(지름 38mm x 높이 15mm)이 쏙 들어가도록 바닥면에 실린더를 배치하고 Boolean Difference로 결합 구멍을 가공합니다.",
+                subDesc: "원형 미니 LED 모듈(지름 30mm)이 들어가도록 바닥면에 실린더를 배치하고 Boolean Difference로 결합 구멍을 가공합니다.",
                 details: [
-                  "<b>공차 팁</b>: LED 부품의 실측 지름보다 0.4mm 더 크게 원기둥을 만들어 Boolean 차집합을 실행해야 출력 후 조립 시 뻑뻑하지 않고 완벽히 장착됩니다.",
-                  "<b>전원선 통로</b>: 유선 USB 조명일 경우 하단 측면에 지름 4mm의 케이블 출구 홈을 추가로 뚫어줍니다."
+                  "<div style='margin-top: 10px; margin-bottom: 8px; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;'><div style='flex: 1; min-width: 200px; max-width: 320px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>바닥면에 실린더 배치 (결합 홈 위치 잡기)</div><img src='./images/led_cylinder_placement.png' alt='바닥면 실린더 배치' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div><div style='flex: 1; min-width: 200px; max-width: 320px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; text-align: center;'><div style='font-size: 0.76rem; font-weight: 600; color: #334155; margin-bottom: 5px;'>Boolean Difference 적용 후 홈 타공 완료</div><img src='./images/led_boolean_difference.png' alt='Boolean Difference 결과' style='width: 100%; height: auto; border-radius: 4px; display: block;' /></div></div>"
                 ]
               }
             ]
           }
         ],
         hotkeys: [
-          { key: "Ctrl + R", desc: "보셀 리메쉬 (Voxel Remesh) 실행" },
+          { key: "R / Ctrl + R", desc: "복셀 크기 가이드 조절(R) / 리메시 실행(Ctrl + R)" },
+          { key: "Alt + Z", desc: "X-Ray 모드 토글 (오브젝트 내부 투시 표시)" },
           { key: "G (Sculpt)", desc: "Grab 브러시 (전체 윤곽 및 형태 당기기)" },
           { key: "Shift (Hold)", desc: "작업 중 즉시 부드럽게 정돈 (Smooth)" },
           { key: "Ctrl (Hold)", desc: "브러시 볼륨 반대로 깎아내기 (Invert)" },
@@ -507,11 +528,7 @@ export const coursesData = [
           { key: "Ctrl + I", desc: "마스크 영역 반전 (Invert Mask)" },
           { key: "Alt + M", desc: "마스크 전체 해제 (Clear Mask)" }
         ],
-        printTips: [
-          "캐릭터 조명은 출력 시 빛 투과율이 우수한 화이트(White), 반투명(Translucent) PLA 필라멘트를 사용하는 것이 가장 효과적입니다.",
-          "내부 채우기(Infill)를 0%(외벽 두께 1.6~2.0mm)로 설정하여 속이 빈 형태로 슬라이싱해야 내부 조명이 고르게 확산됩니다.",
-          "바닥 LED 모듈 결합부는 서포터 없이 출력할 수 있도록 45도 브릿지 각도를 유지하세요."
-        ]
+        printTips: []
       },
       {
         id: 3,
