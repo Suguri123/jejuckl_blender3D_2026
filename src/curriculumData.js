@@ -538,7 +538,7 @@ export const coursesData = [
         objectType: "phone_stand",
         outcomes: [
           "블렌더 셰이딩 및 재질(Material Properties) 색상, 반사율, 이미지 텍스처 매핑 실습",
-          "Texture Paint 워크스페이스에서 캐릭터 눈, 눈썹, 볼터치, 의상 디테일 직접 붓질 페인팅",
+          "Texture Paint 워크스페이스에서 캐릭터 눈, 눈썹, 볼터치, 의상 디테일 페인팅",
           "스탠딩 피규어 자립을 위한 베이스 스탠드 결합 핀/홈(Pin & Hole) 공차 설계",
           "Bambu AMS(멀티컬러) 4색 필라멘트 슬롯 매핑 및 슬라이서 색칠 도구(Color Painting) 마스터",
           "실습예제 : 완성도 높은 멀티컬러 스탠딩 피규어 슬라이싱 및 출력 파일(.3mf/.gcode) 생성"
@@ -577,41 +577,19 @@ export const coursesData = [
                 subDesc: "Texture Slots에서 Base Color 텍스처를 고해상도로 생성하여 선명한 드로잉 캔버스를 준비합니다.",
                 img: "./images/texture_painting_guide.png",
                 imgWidth: "75%"
-              },
-              {
-                subTitle: "② 대칭 채색 및 브러시 블렌딩 기법",
-                subDesc: "대칭(Symmetry X)을 켜고 브러시 색상과 강도를 조절하여 눈동자 하이라이트와 뺨의 홍조를 자연스럽게 묘사합니다."
               }
             ]
           },
           {
             step: 3,
-            title: "3. 캐릭터 포즈 리깅 (기초 Armature 뼈대 연결)",
-            desc: "스탠딩 피규어의 생동감 있는 자세를 연출하기 위해 기초 뼈대(Armature)를 심고 메쉬에 바인딩합니다.",
-            subItems: [
-              {
-                subTitle: "① Armature 뼈대 생성 및 관절 배치",
-                subDesc: "Shift + A ➔ Armature 생성 후 Viewport Display의 In Front를 켜고 Edit Mode에서 E키로 척추, 팔, 다리 뼈를 확장합니다.",
-                img: "./images/armature_in_front.png",
-                imgWidth: "65%"
-              },
-              {
-                subTitle: "② 자동 웨이트(With Automatic Weights) 바인딩 및 포즈 설정",
-                subDesc: "캐릭터 메쉬 ➔ Armature 순으로 선택 후 Ctrl + P ➔ With Automatic Weights를 적용하고, Pose Mode(R키)에서 개성 있는 포즈를 잡습니다."
-              }
-            ]
-          },
-          {
-            step: 4,
-            title: "4. 스탠딩 피규어 베이스 스탠드 & 결합 핀(Pin & Hole) 설계",
+            title: "3. 스탠딩 피규어 베이스 스탠드 & 결합 핀(Pin & Hole) 설계",
             desc: "캐릭터 피규어가 넘어지지 않고 당당하게 자립할 수 있도록 전용 받침대와 발바닥 결합 핀을 정밀 설계합니다.",
             subItems: [
               {
                 subTitle: "① 원형/다각형 베이스 스탠드 모델링",
                 subDesc: "Shift + A ➔ Cylinder를 추가하여 [지름: 60mm, 높이: 4mm]의 깔끔한 베이스를 제작하고 상단 모서리에 Bevel(Ctrl+B)을 적용합니다.",
                 details: [
-                  "스마트폰 거치대나 소품 스탠드로도 겸용할 수 있도록 앞쪽에 거치 홈을 파거나 캐릭터 로고를 양각할 수 있습니다.",
-                  "<div style='margin-top: 10px; max-width: 560px;'><iframe width='100%' height='315' src='https://www.youtube.com/embed/Rsg-b_KfcP4' title='스탠드/거치대 구조 제작 영상' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen style='border-radius: 8px;'></iframe><p style='font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 8px; text-align: center;'>스탠드 및 받침대 구조 제작 노하우 영상</p></div>"
+                  "스마트폰 거치대나 소품 스탠드로도 겸용할 수 있도록 앞쪽에 거치 홈을 파거나 캐릭터 로고를 양각할 수 있습니다."
                 ]
               },
               {
@@ -621,8 +599,8 @@ export const coursesData = [
             ]
           },
           {
-            step: 5,
-            title: "5. 실습예제 : Bambu AMS 멀티컬러 색상 매핑 & 3D 슬라이싱",
+            step: 4,
+            title: "4. 실습예제 : Bambu AMS 멀티컬러 색상 매핑 & 3D 슬라이싱",
             desc: "뱀부랩(Bambu Lab) AMS 멀티컬러 시스템과 연동하여 별도 도색 없이 출력만으로 여러 색상이 한 번에 나오는 멀티컬러 슬라이싱을 마스터합니다.",
             subItems: [
               {
@@ -637,10 +615,6 @@ export const coursesData = [
                   "<b>Sphere / Circle (원형 브러시)</b>: 눈동자, 볼터치 등 미세한 디테일 영역 수동 컬러링",
                   "<b>Smart Fill (각도 감지 채우기)</b>: 30도 이상 꺾이는 모서리 경계를 알아서 인식하여 깔끔한 색 분할"
                 ]
-              },
-              {
-                subTitle: "③ 퍼지 타워(Prime Tower) 및 트리 서포터(Tree Support) 최적화",
-                subDesc: "색상이 바뀔 때 노즐 잔여 필라멘트를 배출하는 퍼지 타워와 필라멘트 낭비를 최소화하는 플러시 볼륨(Flush Volume)을 설정하고, 캐릭터 팔/턱 아래에 손쉬운 탈거가 가능한 슬림 트리 서포터를 생성하여 슬라이싱합니다."
               }
             ]
           }
@@ -649,9 +623,7 @@ export const coursesData = [
           { key: "Z", desc: "뷰포트 셰이딩 파이 메뉴 (Material Preview / Solid)" },
           { key: "Shift + Spacebar", desc: "텍스처 페인트 브러시 도구함 호출" },
           { key: "X", desc: "페인팅 전경색/배경색 스왑 (Color Swap)" },
-          { key: "Ctrl + P", desc: "오브젝트 뼈대 바인딩 (Parenting)" },
-          { key: "Ctrl + Tab", desc: "Object Mode ↔ Pose Mode 전환" },
-          { key: "Alt + R", desc: "포즈 모드 회전값 원상태 초기화" }
+          { key: "Ctrl + B", desc: "모서리 베벨 (Bevel) 적용" }
         ],
         printTips: [
           "멀티컬러 출력 시 색 번짐(Bleeding)을 방지하려면 연한 색상(화이트/피부색)에서 어두운 색상(블랙/레드)으로 전이될 때의 플러시 볼륨을 1.2배 이상 높여주세요.",
