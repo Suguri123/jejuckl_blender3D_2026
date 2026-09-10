@@ -54,7 +54,7 @@ export function buildSearchIndex() {
   // 1. Courses and Lessons
   coursesData.forEach(course => {
     course.lessons.forEach(lesson => {
-      if (lesson.id >= 3) return; // 3~4회차 비활성화
+      if (lesson.id > 4) return;
       // Lesson Summary
       index.push({
         id: `lesson-${course.id}-${lesson.id}`,

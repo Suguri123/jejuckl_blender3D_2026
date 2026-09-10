@@ -49,7 +49,7 @@ function renderSidebarCourses() {
       <div class="course-lessons-list">
         ${course.lessons.map(lesson => {
           const cleanTitle = lesson.title.replace(/^[0-9]+(차시|회차):\s*/, '');
-          const isUnderConstruction = lesson.id >= 4;
+          const isUnderConstruction = lesson.id > 4;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="nav-item ${isUnderConstruction ? 'disabled' : ''}" 
@@ -97,7 +97,7 @@ function renderOverviewCards() {
       </div>
       <div class="lessons-grid">
         ${course.lessons.map(lesson => {
-          const isUnderConstruction = lesson.id >= 4;
+          const isUnderConstruction = lesson.id > 4;
           return `
             <a href="${isUnderConstruction ? 'javascript:void(0)' : `#course-${course.id}-lesson-${lesson.id}`}" 
                class="quick-card ${isUnderConstruction ? 'disabled' : ''}"
@@ -140,7 +140,7 @@ function handleHashChange() {
     currentCourseId = courseId;
     currentLessonId = lessonId || 1;
 
-    if (currentLessonId >= 4) {
+    if (currentLessonId > 4) {
       alert('준비 중인 차시입니다.');
       window.location.hash = '#overview';
       return;
@@ -865,6 +865,11 @@ function updateLessonContent(courseId, lessonId) {
   // Steps
   const stepsEl = document.getElementById('current-steps');
   stepsEl.innerHTML = lesson.steps.map(s => `
+    ${s.beforeStepImg ? `
+      <div class="before-step-img-box" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.5rem; margin-bottom: 0.6rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <img src="${s.beforeStepImg}" alt="${s.title}" style="width: 100%; display: block; height: auto; object-fit: contain; border-radius: 6px;" />
+      </div>
+    ` : ''}
     <div class="step-item flex-col">
       <div class="step-header-box">
         <div class="step-num">${s.step}</div>
@@ -882,7 +887,7 @@ function updateLessonContent(courseId, lessonId) {
                   <img src="${sub.img}" alt="${sub.subTitle}" style="max-width: ${sub.imgWidth || '100%'}; width: 100%; display: block; height: auto; object-fit: contain;" />
                 </div>
               ` : ''}
-              <h5 style="font-size: 0.9rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.3rem;">${sub.subTitle}</h5>
+              ${sub.subTitle ? `<h5 style="font-size: 0.9rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.3rem;">${sub.subTitle}</h5>` : ''}
               <p style="font-size: 0.83rem; color: #475569; margin-bottom: 0.5rem;">${sub.subDesc}</p>
               ${sub.img && sub.imgPos === 'top' ? `
                 <div class="sub-item-img-box" style="border-radius: 6px; overflow: hidden; border: 1px solid #e2e8f0; padding: 0.3rem; background: #fafafa; margin-bottom: 0.6rem; display: inline-block;">
@@ -949,13 +954,21 @@ function updateLessonContent(courseId, lessonId) {
   }
 
   // Quick Hotkeys
+  const hotkeysBox = document.querySelector('.hotkey-quick-bar');
   const hotkeysEl = document.getElementById('quick-hotkeys');
-  hotkeysEl.innerHTML = lesson.hotkeys.map(h => `
-    <div class="key-pill">
-      <span class="key-badge">${h.key}</span>
-      <span>${h.desc}</span>
-    </div>
-  `).join('');
+  if (hotkeysBox && hotkeysEl) {
+    if (lesson.hotkeys && lesson.hotkeys.length > 0) {
+      hotkeysBox.style.display = '';
+      hotkeysEl.innerHTML = lesson.hotkeys.map(h => `
+        <div class="key-pill">
+          <span class="key-badge">${h.key}</span>
+          <span>${h.desc}</span>
+        </div>
+      `).join('');
+    } else {
+      hotkeysBox.style.display = 'none';
+    }
+  }
 
   // 3D Model Render
   if (viewer && lesson.objectType) {
